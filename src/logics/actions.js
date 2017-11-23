@@ -9,11 +9,11 @@ export function requestEvents() {
 }
 
 export function receiveEvents(json) {
-    return {
-          type: RECEIVE_EVENTS,
-          events: json.data.children.map(child => child.data),
-          receivedAt: Date.now()
-        }
+  console.log('receiveEvents', json)
+  return {
+    type: RECEIVE_EVENTS,
+    payload: json,
+  }
 }
 
 export function fetchFails(e) {
@@ -26,8 +26,13 @@ export function fetchFails(e) {
 export function fetchEvents() {
   return (dispatch) => {
     dispatch(requestEvents)
-    return fetch('https://google.ru')
-      .then(res => res.json())
+    const url = `http://localhost:8000/api/events`
+    console.log("url", url)
+    return fetch(url)
+      .then(res => {
+        console.log('res', res)
+        return res.json()
+      })
       .then(json =>
         dispatch(receiveEvents(json))
       )

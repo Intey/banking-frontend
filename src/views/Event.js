@@ -1,13 +1,14 @@
 import React from 'react'
 
-const Event = (data, onClick) => (
-  <div class="event">
-    <div class="caption">{data.caption}</div>
-    <div class="price">{data.price}</div>
-    <div class="authors">{data.authors}</div>
-    <div class="participants">{data.participants}</div>
-    <div class="groups">{data.groups}</div>
-  </div>
-)
-
-export default Event
+export default function Event({data, onClick}) {
+  console.log("event", data)
+  return (
+    <div className="event">
+      <div className="caption">{data.name}</div>
+      <div className="price">{data.price}</div>
+      <div className="authors">{data.authors}</div>
+      <div className="participants">{data.participants}</div>
+      <div className="groups">{data.groups}</div>
+    </div>
+  )
+}
