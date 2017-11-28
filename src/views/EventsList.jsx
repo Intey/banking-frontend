@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Event from './Event.js'
+import Event from './Event'
 
 const EventsList = ({ events, onClick }) => {
   console.log('events', events)
@@ -8,9 +8,9 @@ const EventsList = ({ events, onClick }) => {
   {
     return (
       <div className="events-list">
-        {events.map( (e, id) => (
+        {events.map( (e, id) => 
           <Event key={id} data={e} onClick={onClick}/>
-        ))}
+        )}
       </div>
     )
   }
