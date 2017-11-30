@@ -1,0 +1,19 @@
+.event {
+  color: #444;
+  margin: .2em;
+  padding: .5em;
+  background-color: #DDD;
+  min-width: 15em;
+  flex-grow: 1;
+}
+
+.event > .caption {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: .4em;
+  border-bottom: 1px solid #CCC;
+}
+
+.event .link {
+  color: rgba(0, 120, 185, 0.94);
+}
