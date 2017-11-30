@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import './App.css';
 import EventsList from './views/EventsList'
+import Menu from './views/Menu'
 
 const mapStateToProps = state => {
   console.log('map for App', state)
@@ -15,8 +16,9 @@ function App(props) {
       <header className="App-header">
         <h3>Banking 01050-1</h3>
       </header>
-      <article>
+      <article className="body">
         <EventsList {...props}/>
+        <Menu shown={true}/>
       </article>
     </div>
   );

@@ -1,0 +1,22 @@
+.menu {
+  background-color: rgba(100, 100, 100, 1);
+  position: absolute;
+  right: -7em;
+  transition-property: right;
+  transition-duration: 100ms;
+  overflow: hidden;
+}
+.menu:hover {
+  right: 0;
+
+}
+/*
+.menu.shown {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.menu.hidden {
+  transform: translate(+6em);
+
+}
+*/
