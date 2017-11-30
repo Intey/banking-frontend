@@ -1,6 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import events from './eventsReducer.js'
+import filter from './filterReducer.js'
+import sort from './sortReducer.js'
+import fetching from './fetchingReducer.js'
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -9,16 +12,20 @@ function isFunction(functionToCheck) {
 }
 
 export const ping = store => next => action => {
+	console.log('PING. Current state')
+	console.log(store.getState())
+
   if (isFunction(action))
   {
-    console.log('function action', action)
+    // console.log('function action', action)
   }
   else
   {
-    console.log(action)
+    console.log('action', action)
   }
   return next(action)
 }
 
-export default createStore(events, applyMiddleware(ping, thunk))
+const rootReducer = combineReducers({events, filter, sort, fetching})
+export default createStore(rootReducer, applyMiddleware(ping, thunk))
 

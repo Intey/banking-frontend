@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import './App.css';
-import EventList from './views/EventsList'
+import EventsList from './views/EventsList'
 
 const mapStateToProps = state => {
-  return {
-    events: state.events
-  }
+  console.log('map for App', state)
+  return { ...state }
 }
 
 function App(props) {
@@ -17,7 +16,7 @@ function App(props) {
         <h3>Banking 01050-1</h3>
       </header>
       <article>
-        <EventList {...props}/>
+        <EventsList {...props}/>
       </article>
     </div>
   );
