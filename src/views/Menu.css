@@ -1,22 +1,45 @@
 .menu {
+  position: relative;
+}
+.menu .menu-list {
   background-color: rgba(100, 100, 100, 1);
-  position: absolute;
-  right: -7em;
-  transition-property: right;
-  transition-duration: 100ms;
+  max-height: 0em;
+  padding: 0 .5em;
+  transition:
+    max-height .1s ease-out,
+    padding .1s ease-out;
+
   overflow: hidden;
-}
-.menu:hover {
-  right: 0;
+
+  /* show from right-up corner */
+  position: absolute;
+  right: -.6em;
+  /* slap to header */
+  margin-top: 1.2em;
+
+  /* ul styles */
+  list-style: none;
+  width: 8em;
 
 }
-/*
-.menu.shown {
-  background-color: rgba(100, 100, 100, 0.5);
+
+.menu.shown .menu-list {
+  max-height: 10em;
+  transition:
+    max-height .1s ease-in,
+    padding 0s ease-in;
+
+  padding: .5em;
+}
+.menu.shown .menu-button {
+  background-color: #444;
 }
 
-.menu.hidden {
-  transform: translate(+6em);
-
+.menu-button {
+  font-size: 1.25em;
+  color: #eee;
 }
-*/
+
+.menu-list > .item:hover {
+  background-color: #888;
+}

@@ -15,10 +15,10 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <h3>Banking 01050-1</h3>
+        <Menu/>
       </header>
       <article className="body">
         <EventsList {...props}/>
-        <Menu shown={true}/>
       </article>
     </div>
   );
