@@ -4,7 +4,7 @@ import Event from './Event'
 import './EventsList.css'
 
 const EventsList = ({ events, onClick }) => {
-  console.log('View/EventList: events', events)
+  // console.log('View/EventList: events', events)
   if (events)
   {
     return (
@@ -12,7 +12,7 @@ const EventsList = ({ events, onClick }) => {
         {events.map( (e, id) => {
           if (!e.private)
             return <Event key={id} data={e} onClick={onClick}/>
-          else 
+          else
             return null
         })}
       </div>

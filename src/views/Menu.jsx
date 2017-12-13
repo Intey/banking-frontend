@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './Menu.css'
 
@@ -8,32 +9,54 @@ class Menu extends React.Component {
     this.state = {
       shown: false
     }
+
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+	}
+
+	componentDidMount() {
+			document.addEventListener('mousedown', this.handleClickOutside);
+		}
+	componentWillUnmount() {
+		document.removeEventListener('mousedown', this.handleClickOutside);
+	}
+	setWrapperRef(node) {
+		this.wrapperRef = node
+	}
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ shown: false })
+    }
   }
 
   openClose = () => {
     this.setState({ shown: !this.state.shown })
   }
 
-  onBlur = () => {
-    this.setState({ shown: false })
-  }
-
   render() {
     // tabIndex + onBlur
     return (
-      <div className={"menu " + (this.state.shown? "shown": "") }>
+      <div ref={this.setWrapperRef} className={"menu " + (this.state.shown? "shown": "") }>
         <span className="menu-button" onClick={this.openClose}
           onBlur={this.onBlur}
           tabIndex={0}
         >Menu</span>
         <ul className="menu-list">
-          <li className="item">Sort by date</li>
-          <li className="item">Sort by Name</li>
-          <li className="item">Filter by type</li>
+          <li className="item" onClick={this.props.onEventDateSort}>Sort by date</li>
+          <li className="item" onClick={this.props.onEventNameSort}>Sort by Name</li>
+          <li className="item" onClick={this.props.onEventFilterMy}>Only my</li>
+          <li className="item" onClick={this.props.onEventFilterReset}>ResetFilter</li>
         </ul>
       </div>
     )
   }
+}
+
+Menu.propTypes = {
+  onEventDateSort: PropTypes.func.isRequired,
+  onEventNameSort: PropTypes.func.isRequired,
+  onEventFilterMy: PropTypes.func.isRequired,
+  onEventFilterReset: PropTypes.func.isRequired,
 }
 
 export default Menu

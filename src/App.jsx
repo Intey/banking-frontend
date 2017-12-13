@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 
 import './App.css';
 import EventsList from './views/EventsList'
-import Menu from './views/Menu'
+import Menu from './containers/Menu'
 
 const mapStateToProps = state => {
-  console.log('map for App', state)
   return { ...state }
 }
 

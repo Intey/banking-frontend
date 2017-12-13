@@ -1,3 +1,5 @@
+import { HOST, PORT } from '../settings'
+
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const FETCH_FAILS = 'FETCH_FAILS'
@@ -28,7 +30,7 @@ export function fetchFails(e) {
 export function fetchEvents() {
   return (dispatch) => {
     dispatch(requestEvents)
-    const url = `http://localhost:8000/api/events`
+    const url = `http://${HOST}:${PORT}/api/events`
     console.log("url", url)
     return fetch(url)
       .then(res => {
@@ -49,6 +51,6 @@ export function fetchEvents() {
 export function setFilter(filter) {
   return {
     type: FILTER,
-    filter
+    filter: filter
   }
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import './Event.css'
 
 export default function Event({data, onClick}) {
-  console.log("event", data)
   if (! data.url || data.url === "")
   {
     data.url = "/#"
