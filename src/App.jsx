@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import './App.css';
-import EventsList from './views/EventsList'
+import EventsList from './containers/EventsList'
 import Menu from './containers/Menu'
 
 const mapStateToProps = state => {

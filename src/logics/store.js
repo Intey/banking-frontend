@@ -12,8 +12,8 @@ function isFunction(functionToCheck) {
 }
 
 export const ping = store => next => action => {
-	console.log('PING. Current state')
-  // console.log(store.getState())
+	console.log('LOG. Current state')
+  console.log(store.getState())
 
   if (isFunction(action))
   {
@@ -23,6 +23,7 @@ export const ping = store => next => action => {
   {
     console.log('action', action)
   }
+	console.log('END LOG')
   return next(action)
 }
 
