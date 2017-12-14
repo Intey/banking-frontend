@@ -7,7 +7,7 @@ export function filterEvents(events, filter) {
   console.log('filterEvents', events, filter)
   switch(filter) {
     case filterTypes.my:
-      const out = events.filter( e => e.author.toLowerCase() === 'Intey' )
+      const out = events.filter( e => e.author.toLowerCase() === 'intey' )
       console.log("OUT", out)
       return out
     case filterTypes.all:
