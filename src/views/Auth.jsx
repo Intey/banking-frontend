@@ -8,8 +8,18 @@ export default class Auth extends React.Component {
   }
 
   send = ()=> {
-    let data = new FormData(document.getElementById('auth-form'))
-    fetch(`http://${HOST}:${PORT}/api/auth/`, { method: 'POST', body: data })
+    let username = document.getElementById('username').value
+    let password = document.getElementById('password').value
+    console.log(username, password);
+    fetch(`http://${HOST}:${PORT}/api/auth/`,
+      {
+        method: 'POST',
+        body: JSON.stringify({'username': username, 'password': password }),
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        }
+      }
+    )
       .then(  (r) => console.log(r)   )
       .catch( (e) => console.error(e) )
   }
@@ -17,8 +27,8 @@ export default class Auth extends React.Component {
   render() {
     return  (
       <form className="auth-form">
-        <input type="text" name="username"/>
-        <input type="password" name="password"/>
+        <input Id="username" type="text" name="username"/>
+        <input Id="password" type="password" name="password"/>
         <button type="button" onClick={this.send}>log in</button>
       </form>
     )
