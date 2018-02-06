@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import events from './eventsReducer.js'
-import filter from './filterReducer.js'
-import sort from './sortReducer.js'
-import fetching from './fetchingReducer.js'
+import events from './eventsReducer'
+import filter from './filterReducer'
+import sort from './sortReducer'
+import fetching from './fetchingReducer'
+import token from './auth/reducer'
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -27,6 +28,9 @@ export const ping = store => next => action => {
   return next(action)
 }
 
-const rootReducer = combineReducers({events, filter, sort, fetching})
-export default createStore(rootReducer, applyMiddleware(ping, thunk))
+const rootReducer = combineReducers({events, filter, sort, fetching, token})
+export default createStore(rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(ping, thunk)
+)
 

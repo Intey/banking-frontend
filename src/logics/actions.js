@@ -5,6 +5,7 @@ export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const FETCH_FAILS = 'FETCH_FAILS'
 export const FILTER = 'FILTER'
 export const SORT = 'SORT'
+export const AUTH = 'AUTH'
 
 export function requestEvents() {
   return {

@@ -2,15 +2,10 @@ import React from 'react';
 import {HOST, PORT} from '../settings'
 
 export default class Auth extends React.Component {
-  constructor(props)
-  {
-    super(props)
-  }
-
   send = ()=> {
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
-    console.log(username, password);
+    this.props.onRequestStart();
     fetch(`http://${HOST}:${PORT}/api/auth/`,
       {
         method: 'POST',
@@ -20,8 +15,15 @@ export default class Auth extends React.Component {
         }
       }
     )
-      .then(  (r) => console.log(r)   )
-      .catch( (e) => console.error(e) )
+      .then( r => { if (!r.ok) {throw r.json(); } else return r.json() })
+      .then( json => {
+        if (json.token)
+          this.props.onResponse(json)
+      })
+      .catch( e => {
+        this.props.onFailed(e)
+        console.warn(e)
+      })
   }
 
   render() {
