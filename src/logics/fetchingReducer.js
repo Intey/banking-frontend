@@ -1,4 +1,4 @@
-import { RECEIVE_EVENTS, REQUEST_EVENTS } from './actions.js'
+import { RECEIVE_EVENTS, REQUEST_EVENTS } from './event/actions'
 
 export default function fething(state=false, action) {
   switch(action.type) {

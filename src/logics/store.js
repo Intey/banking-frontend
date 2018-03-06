@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import events from './eventsReducer'
-import filter from './filterReducer'
-import sort from './sortReducer'
+import events from './event/reducers'
+import filter from './filter/reducers'
+import sort from './sort/reducers'
 import fetching from './fetchingReducer'
 import { auth as token } from './auth/reducers'
 

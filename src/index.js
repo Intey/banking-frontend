@@ -6,8 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'react-redux'
 import store from './logics/store.js'
-import { fetchEvents } from './logics/actions.js'
-
+import { fetchEvents } from './logics/event/actions'
 
 ReactDOM.render(
   <Provider store={store}>

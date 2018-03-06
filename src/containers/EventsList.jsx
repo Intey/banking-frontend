@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import View from '../views/EventsList'
-import { filterEvents } from '../logics/filter'
+import { filterEvents } from '../logics/filter/domain'
 // import sort from '../logics/sorter'
 
 function mapStateToProps(state) {

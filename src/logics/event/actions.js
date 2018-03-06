@@ -1,10 +1,8 @@
-import { HOST, PORT } from '../settings'
+import { HOST, PORT } from '../../settings'
 
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
 export const FETCH_FAILS = 'FETCH_FAILS'
-export const FILTER = 'FILTER'
-export const SORT = 'SORT'
 
 export function requestEvents() {
   return {
@@ -48,9 +46,3 @@ export function fetchEvents() {
 }
 
 
-export function setFilter(filter) {
-  return {
-    type: FILTER,
-    filter: filter
-  }
-}

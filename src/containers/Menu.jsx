@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import View from '../views/Menu'
-import { setFilter } from '../logics/actions'
-import {filterTypes } from '../logics/filter'
+import { setFilter } from '../logics/filter/actions'
+import {filterTypes } from '../logics/filter/domain'
 
 function mapStateToProps(state) {
 	return {
