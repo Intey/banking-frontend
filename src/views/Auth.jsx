@@ -5,7 +5,6 @@ export default class Auth extends React.Component {
   send = ()=> {
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
-    this.props.onRequestStart();
     fetch(`http://${HOST}:${PORT}/api/auth/`,
       {
         method: 'POST',
@@ -15,10 +14,10 @@ export default class Auth extends React.Component {
         }
       }
     )
-      .then( r => { if (!r.ok) {throw r.json(); } else return r.json() })
+      .then( r => r.json() )
       .then( json => {
-        if (json.token)
-          this.props.onResponse(json)
+        if (json.token) this.props.onResponse(json)
+        else throw json // error
       })
       .catch( e => {
         this.props.onFailed(e)
@@ -29,8 +28,8 @@ export default class Auth extends React.Component {
   render() {
     return  (
       <form className="auth-form">
-        <input Id="username" type="text" name="username"/>
-        <input Id="password" type="password" name="password"/>
+        <input id="username" type="text" name="username"/>
+        <input id="password" type="password" name="password"/>
         <button type="button" onClick={this.send}>log in</button>
       </form>
     )
