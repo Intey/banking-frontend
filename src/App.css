@@ -3,7 +3,7 @@
   overflow: hidden;
 }
 
-.App-header {
+.app-header {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -14,6 +14,6 @@
   color: #eee;
 }
 
-.App-header > .menu {
+.app-header > .menu {
   margin: auto 0;
 }
