@@ -3,17 +3,3 @@
   overflow: hidden;
 }
 
-.app-header {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-
-  font-size: 16px;
-  background-color: #222;
-  padding: 0.2rem 0.6rem;
-  color: #eee;
-}
-
-.app-header > .menu {
-  margin: auto 0;
-}

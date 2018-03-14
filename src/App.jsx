@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css';
 import EventsList from './containers/EventsList'
-import Menu from './containers/Menu'
+import Header from './views/Header'
 import Auth from './views/Auth'
 import Builder from './views/Builder'
 import { AUTH, AUTH_ERROR } from './logics/auth/actions'
@@ -23,16 +23,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const AuthContainer = connect( state => { return state }, mapDispatchToProps)(Auth)
-
-
-function Header(props) {
-  return (
-    <header className="app-header">
-      <h3>Banking 01050-1</h3>
-      <Menu/>
-    </header>
-  )
-}
 
 function MainHOC(authorized) {
   return () => (authorized ?
