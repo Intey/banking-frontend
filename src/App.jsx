@@ -4,21 +4,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css';
 
-import EventsList from './containers/EventsList'
 import Header from './views/Header'
 import Builder from './views/Builder'
-import AuthContainer from './containers/Auth'
+import MainHOC from './containers/MainHOC'
 
 function mapStateToProps(state) {
   return { isloginin: state.token, fetching: state.auth_fetching }
-}
-
-function MainHOC(authorized) {
-  return () => (authorized ?
-    <EventsList/>
-    :
-    <AuthContainer/>
-  )
 }
 
 function App({isloginin, fetching}) {
