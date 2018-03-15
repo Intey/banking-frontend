@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Switch } from 'react-router'
 
 import './App.css';
 
-import Header from './views/Header'
+import AuthContainer from './containers/Auth'
+import EventsList from './containers/EventsList'
 import Builder from './views/Builder'
-import MainHOC from './containers/MainHOC'
+import Header from './views/Header'
 
 function mapStateToProps(state) {
   return { isloginin: state.token, fetching: state.auth_fetching }
@@ -15,13 +17,19 @@ function mapStateToProps(state) {
 function App({isloginin, fetching}) {
   return (
     <Router>
-      <div className="app">
-        <Header/>
-        <Route path="/" render={MainHOC(isloginin)}/>
-        <Route path="/new" component={Builder}/>
-      </div>
+      { isloginin ?
+          <div className="app">
+            <Header/>
+            <Switch>
+              <Route exact path="/" component={EventsList}/>
+              <Route path="/new" component={Builder}/>
+            </Switch>
+          </div>
+          :
+          <AuthContainer/>
+      }
     </Router>
-  );
+  )
 }
 
 export default connect(mapStateToProps)(App)

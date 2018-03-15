@@ -1,10 +1,13 @@
 import React from 'react';
-import EventsList from './EventsList'
-import AuthContainer from './Auth'
+
+import { Route } from 'react-router-dom'
 
 export default function MainHOC(authorized) {
   return () => (authorized ?
-    <EventsList/>
+    <Switch>
+      <Route path="/list" component={EventsList}></Route>
+      <Route path="/new" component={Builder}></Route>
+    </Switch>
     :
     <AuthContainer/>
   )

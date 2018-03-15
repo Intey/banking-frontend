@@ -2,8 +2,6 @@
 .app-header {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
-
   font-size: 16px;
   background-color: #222;
   padding: 0.2rem 0.6rem;
@@ -12,4 +10,25 @@
 
 .app-header > .menu {
   margin: auto 0;
+  margin-left: auto;
+}
+
+.app-header a {
+  text-decoration: none;
+  color: #eee;
+
+}
+
+.app-header * {
+  align-self: center;
+}
+
+.header-button {
+  background: #666;
+  padding: 0.5em;
+  margin: 0 1em;
+}
+
+.header-button:hover {
+  background: #777;
 }
