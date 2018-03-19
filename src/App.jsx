@@ -7,7 +7,7 @@ import './App.css';
 
 import AuthContainer from './containers/Auth'
 import EventsList from './containers/EventsList'
-import Builder from './views/Builder'
+import Builder from './containers/Builder'
 import Header from './views/Header'
 
 function mapStateToProps(state) {
