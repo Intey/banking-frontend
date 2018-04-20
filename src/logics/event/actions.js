@@ -1,5 +1,6 @@
 import { createEvent, getEvents } from '../../api/event'
 import { EVENTS_URL } from '../../api/base'
+import { act } from '../../utils/action.js'
 
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
@@ -15,31 +16,23 @@ export function requestEvents() {
 }
 
 export function receiveEvents(json) {
-  console.log('receiveEvents', json)
-  return {
-    type: RECEIVE_EVENTS,
-    payload: json,
-  }
+  return act(RECEIVE_EVENTS, json)
 }
 
 export function fetchFails(e) {
-  return {
-    type: FETCH_FAILS,
-    error: e
-  }
+  return act(FETCH_FAILS, e)
 }
 
 export function createEventRequest(payload) {
   return (dispatch) => {
-    dispatch({ type: CREATE_REQUEST, payload: payload })
+    dispatch(act(CREATE_REQUEST, payload))
     createEvent(payload)
-    .then( json => dispatch({ type: CREATE_EVENT_RESPONSE, payload: json }) )
-    .catch( e => e.then( errors => dispatch( { type: CREATE_EVENT_FAILS, error: errors }) ))
+    .then( json => dispatch(act(CREATE_EVENT_RESPONSE, json)) )
+    .catch( e => e.then( errors => dispatch(act(CREATE_EVENT_FAILS, errors)) ))
 }
 }
 
 export function fetchEvents() {
-  console.log("try get events")
   return (dispatch) => {
     dispatch(requestEvents)
     getEvents()

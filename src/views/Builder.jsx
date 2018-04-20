@@ -8,13 +8,34 @@ function Error({message}) {
   )
 }
 
+function Field({name, error=undefined, children=undefined, ...props}) {
+  let maybeError = (
+    error !== undefined ?
+    <span className="field-error">{error}</span>
+    :
+    null
+  )
+  if (children === undefined || children === null)
+    children = <input className={`event-${name}`} name={name} {...props}/>
+
+  let fieldClasses = `field ${error? 'error-field':''}`
+  return (
+    <div className={fieldClasses}>
+      <label className="label" for={name}>{name}</label>
+      <div class="child">
+        {children}
+      </div>
+      {maybeError}
+    </div>
+  )
+}
 
 export default class Builder extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       name: "",
-      price: 0,
+      price: 1,
       date: "",
       author: "",
       participants: [],
@@ -86,25 +107,23 @@ export default class Builder extends React.Component {
   }
 
   render() {
-    let errorsView = null
-    let errors = this.props.errors
-    if (errors)
-      errorsView = errors.map( e => {
-        return <Error message={e}/>
-      })
-
+    let errors = this.props.errors || {}
     return (
-      <div className="event">
-        <input className="event-name"      name="name"       value={this.state.name}      onChange={this.nameChange}      placeholder="event name "/>
-        <input className="event-price"        name="price"         value={this.state.price}        onChange={this.priceChange}        placeholder="price"/>
-        <input className="event-date"         name="date"          value={this.state.date}         onChange={this.dateChange}         placeholder="date"/>
-        <input className="event-author"      name="author"       value={this.state.author}      onChange={this.authorChange}      placeholder="author"/>
-        <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
-        <TagInput className="event-groups" id="event-groups" tags={this.state.groups} onTagsChange={this.onGroupsChange} placeholder="new group"/>
+      <div className="builder">
+        <Field name="name" value={this.state.name} onChange={this.nameChange} placeholder="event name" error={errors.name}/>
+        <Field name="price" value={this.state.price} onChange={this.priceChange} placeholder="price" error={errors.price}/>
+        <Field name="date" error={errors.date}>
+          <input className="event-date" type="date" name="date" value={this.state.date} onChange={this.dateChange} placeholder="date"/>
+        </Field>
+        <Field name="author" value={this.state.author} onChange={this.authorChange} placeholder="author" error={errors.author}/>
+        <Field name="participants">
+          <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
+        </Field>
+        <Field name="groups">
+          <TagInput className="event-groups" id="event-groups" tags={this.state.groups} onTagsChange={this.onGroupsChange} placeholder="new group"/>
+        </Field>
         <button onClick={this.catchData}>Create</button>
-        {errorsView}
       </div>
     )
   }
-
 }

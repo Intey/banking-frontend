@@ -11,7 +11,7 @@ function fetchErrorMiddleware(response) {
 }
 
 export function createEvent(payload) {
-  console.log("create new event API", payload)
+  // console.log("create new event API", payload)
   return fetchErrorMiddleware(fetch(EVENTS_URL, {
     method: 'POST',
     headers: {

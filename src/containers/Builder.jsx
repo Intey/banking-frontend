@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 
 import Builder from '../views/Builder'
 import { createEventRequest } from '../logics/event/actions'
-import { act } from '../utils/action'
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -10,5 +9,12 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const BuilderContainer = connect(state => state, mapDispatchToProps)(Builder)
+function mapStateToProps(state) {
+  return {
+    errors: state.errors.builder
+  }
+}
+
+const BuilderContainer = connect(mapStateToProps, mapDispatchToProps)(Builder)
+
 export default BuilderContainer

@@ -5,6 +5,7 @@ import filter from './filter/reducers'
 import sort from './sort/reducers'
 import fetching from './fetchingReducer'
 import { auth as token } from './auth/reducers'
+import errors from './errors/reducer'
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -28,7 +29,15 @@ export const ping = store => next => action => {
   return next(action)
 }
 
-const rootReducer = combineReducers({events, filter, sort, fetching, token})
+const rootReducer = combineReducers({
+  events,
+  filter,
+  sort,
+  fetching,
+  token,
+  errors,
+})
+
 let debug = true
 
 let initial = {
