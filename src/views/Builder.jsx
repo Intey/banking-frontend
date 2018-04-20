@@ -1,34 +1,7 @@
 import React from 'react'
 import './Builder.css'
 import TagInput from './TagInput'
-
-function Error({message}) {
-  return (
-    <p className="error">{message}</p>
-  )
-}
-
-function Field({name, error=undefined, children=undefined, ...props}) {
-  let maybeError = (
-    error !== undefined ?
-    <span className="field-error">{error}</span>
-    :
-    null
-  )
-  if (children === undefined || children === null)
-    children = <input className={`event-${name}`} name={name} {...props}/>
-
-  let fieldClasses = `field ${error? 'error-field':''}`
-  return (
-    <div className={fieldClasses}>
-      <label className="label" for={name}>{name}</label>
-      <div class="child">
-        {children}
-      </div>
-      {maybeError}
-    </div>
-  )
-}
+import Field from './Field.jsx'
 
 export default class Builder extends React.Component {
   constructor(props) {

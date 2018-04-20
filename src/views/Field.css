@@ -1,0 +1,26 @@
+.field {
+  display: grid;
+  margin: 0.2em;
+  padding: 0.1em;
+  grid-template-columns: 6em 13em auto;
+}
+
+.field > .child {
+  margin: 0 .4em;
+  justify-self: stretch;
+}
+
+.field > .child * {
+  width: 100%;
+}
+
+.error-field > .child input {
+  padding: 2px;
+  border: 1px solid #c00;
+  box-shadow: 0 0 5px 1px rgba(220, 53, 53, 0.7);
+}
+
+.field > .field-error {
+  color: #c00;
+  background: #fbb;
+}
