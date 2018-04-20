@@ -36,12 +36,10 @@ export default class Builder extends React.Component {
       case 'add':
         let participants = [...this.state.participants, payload]
         this.setState({participants: participants })
-        console.log('after add', participants)
         break;
       case 'rm':
         let newParticipants = this.state.participants.filter( e => e !== payload )
         this.setState({participants: newParticipants})
-        console.log('after remove', newParticipants)
         break;
       default:
         break;
@@ -57,7 +55,6 @@ export default class Builder extends React.Component {
       participants : this.state.participants,
       groups       : this.state.groups
     }
-    console.log("catching data", data)
     this.props.onNewEvent(data)
   }
 
@@ -66,12 +63,10 @@ export default class Builder extends React.Component {
       case 'add':
         let groups = [...this.state.groups, payload]
         this.setState({groups: groups })
-        console.log('after add', groups)
         break;
       case 'rm':
         let newGroups = this.state.groups.filter( e => e !== payload )
         this.setState({groups: newGroups})
-        console.log('after remove', newGroups)
         break;
       default:
         break;
