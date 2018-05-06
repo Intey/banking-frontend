@@ -1,6 +1,8 @@
 import React from 'react'
 import './Field.css'
 
+import PropTypes from 'prop-types'
+
 export default function Field({name, error=undefined, children=undefined, ...props}) {
   let maybeError = (
     error !== undefined ?
@@ -14,11 +16,17 @@ export default function Field({name, error=undefined, children=undefined, ...pro
   let fieldClasses = `field ${error? 'error-field':''}`
   return (
     <div className={fieldClasses}>
-      <label className="label" for={name}>{name}</label>
-      <div class="child">
+      <label className="label" htmlFor={name}>{name}</label>
+      <div className="child">
         {children}
       </div>
       {maybeError}
     </div>
   )
+}
+
+Field.propTypes = {
+  name: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  error: PropTypes.string,
 }

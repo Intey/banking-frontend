@@ -3,6 +3,8 @@ import './Builder.css'
 import TagInput from './TagInput'
 import Field from './Field.jsx'
 
+import TypeHintInput from './TypeHintInput.jsx'
+
 export default class Builder extends React.Component {
   constructor(props) {
     super(props)
@@ -16,21 +18,11 @@ export default class Builder extends React.Component {
     }
   }
 
-  nameChange = (e) => {
-    this.setState({name: e.target.value})
-  }
+  nameChange   = (e) => { this.setState({name:   e.target.value}) }
+  priceChange  = (e) => { this.setState({price:  e.target.value}) }
+  dateChange   = (e) => { this.setState({date:   e.target.value}) }
+  authorChange = (value) => { this.setState({author: value}) }
 
-  priceChange = (e) => {
-    this.setState({price: e.target.value})
-  }
-
-  dateChange = (e) => {
-    this.setState({date: e.target.value})
-  }
-
-  authorChange = (e) => {
-    this.setState({author: e.target.value})
-  }
   onParticipantsChange = ({mode, payload}) => {
     switch(mode) {
       case 'add':
@@ -71,7 +63,6 @@ export default class Builder extends React.Component {
       default:
         break;
     }
-
   }
 
   render() {
@@ -83,7 +74,7 @@ export default class Builder extends React.Component {
         <Field name="date" error={errors.date}>
           <input className="event-date" type="date" name="date" value={this.state.date} onChange={this.dateChange} placeholder="date"/>
         </Field>
-        <Field name="author" value={this.state.author} onChange={this.authorChange} placeholder="author" error={errors.author}/>
+        <TypeHintInput name="author" value={this.state.author} onChange={this.authorChange} placeholder="author" error={errors.author}/>
         <Field name="participants">
           <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
         </Field>

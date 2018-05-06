@@ -1,0 +1,13 @@
+.typehint {
+}
+
+.typehint-dropdown {
+  position: absolute;
+  display: none;
+  background-color: #999;
+  padding: 0.5em;
+}
+
+.typehint-dropdown.open {
+  display: block;
+}
