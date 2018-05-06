@@ -1,5 +1,4 @@
 import { createEvent, getEvents } from '../../api/event'
-import { EVENTS_URL } from '../../api/base'
 import { act } from '../../utils/action.js'
 
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
