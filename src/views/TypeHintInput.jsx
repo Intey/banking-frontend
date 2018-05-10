@@ -28,13 +28,12 @@ export default class Component extends React.Component {
     else {
       this.setState({dropped: false})
     }
-
-    this.props.onChange(value)
   }
 
   onSelect = (idx) => {
     let value = this.state.variants[idx].username
     this.setState({value: value, dropped: false})
+    this.props.onSelected(this.state.variants[idx].id)
   }
 
   render() {
@@ -45,11 +44,13 @@ export default class Component extends React.Component {
     else {
       items = this.state.variants.map((v, idx) => <li key={idx} onClick={(e)=> this.onSelect(idx)}>{v.username}</li>)
     }
+    let fieldProps = {...this.props}
+    delete fieldProps.onSelected
     let classes = `typehint-dropdown ${this.state.dropped ? "open": ""}`
     return (
       <div className="typehint">
         <Field name={this.props.name}>
-          <input {...this.props} value={this.state.value} onChange={this.onChange}/>
+          <input {...fieldProps} value={this.state.value} onChange={this.onChange}/>
           <div className={classes}>
             <ul>
               {items}
@@ -62,5 +63,5 @@ export default class Component extends React.Component {
 }
 
 Component.propTypes = {
-  onChange: PropTypes.func.isRequired
+  onSelected: PropTypes.func.isRequired
 }

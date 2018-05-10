@@ -6,7 +6,8 @@ export async function getUsersLike(name) {
     return {
       firstName: u.user.first_name,
       lastName: u.user.last_name,
-      username: u.user.username
+      username: u.user.username,
+      id: u.id
     }
   })
 }

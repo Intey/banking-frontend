@@ -12,7 +12,7 @@ export default class Builder extends React.Component {
       name: "",
       price: 1,
       date: "",
-      author: "",
+      author: -1, // id
       participants: [],
       groups: [],
     }
@@ -21,7 +21,7 @@ export default class Builder extends React.Component {
   nameChange   = (e) => { this.setState({name:   e.target.value}) }
   priceChange  = (e) => { this.setState({price:  e.target.value}) }
   dateChange   = (e) => { this.setState({date:   e.target.value}) }
-  authorChange = (value) => { this.setState({author: value}) }
+  authorSelected = (id) => { this.setState({author: id}) }
 
   onParticipantsChange = ({mode, payload}) => {
     switch(mode) {
@@ -74,7 +74,7 @@ export default class Builder extends React.Component {
         <Field name="date" error={errors.date}>
           <input className="event-date" type="date" name="date" value={this.state.date} onChange={this.dateChange} placeholder="date"/>
         </Field>
-        <TypeHintInput name="author" value={this.state.author} onChange={this.authorChange} placeholder="author" error={errors.author}/>
+        <TypeHintInput name="author" value={this.state.author} onSelected={this.authorSelected} placeholder="author" error={errors.author}/>
         <Field name="participants">
           <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
         </Field>
