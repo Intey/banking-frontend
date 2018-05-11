@@ -4,7 +4,7 @@ import events from './event/reducers'
 import filter from './filter/reducers'
 import sort from './sort/reducers'
 import fetching from './fetchingReducer'
-import { auth as token } from './auth/reducers'
+import { auth } from './auth/reducers'
 import errors from './errors/reducer'
 
 function isFunction(functionToCheck) {
@@ -34,14 +34,18 @@ const rootReducer = combineReducers({
   filter,
   sort,
   fetching,
-  token,
+  auth,
   errors,
 })
 
 let debug = true
 
 let initial = {
-  token: window.sessionStorage.getItem('token')
+  auth: {
+    token: window.sessionStorage.getItem('token'),
+    id: window.sessionStorage.getItem('id'),
+    rate: window.sessionStorage.getItem('rate'),
+  }
 }
 
 let enchancer = compose;

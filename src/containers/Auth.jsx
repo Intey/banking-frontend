@@ -8,7 +8,7 @@ import { act } from '../utils/action'
 function mapDispatchToProps(dispatch) {
   return {
     onFailed: error => dispatch(act(AUTH_ERROR, error || "unknown error")),
-    onResponse: json => dispatch(act(AUTH, json.token))
+    onResponse: json => dispatch(act(AUTH, json)),
   }
 }
 

@@ -11,7 +11,7 @@ import Builder from './containers/Builder'
 import Header from './views/Header'
 
 function mapStateToProps(state) {
-  return { isloginin: state.token, fetching: state.auth_fetching }
+  return { isloginin: state.auth.token, fetching: state.auth_fetching }
 }
 
 function App({isloginin, fetching}) {
