@@ -1,4 +1,4 @@
-import { USERS_URL, get } from './base.js'
+import { USERS_URL, AUTH_URL, get, post } from './base.js'
 
 export async function getUsersLike(name) {
   let users = await get(`${USERS_URL}?search=${name}`)
@@ -13,3 +13,9 @@ export async function getUsersLike(name) {
 }
 
 
+export function authenticate(username, password) {
+  return post(
+    AUTH_URL,
+    {'username': username, 'password': password }
+  )
+}

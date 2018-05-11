@@ -45,8 +45,9 @@ let initial = {
     token: window.sessionStorage.getItem('token'),
     id: window.sessionStorage.getItem('id'),
     rate: window.sessionStorage.getItem('rate'),
-  }
+  },
 }
+
 
 let enchancer = compose;
 if (debug) {

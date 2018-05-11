@@ -1,16 +1,20 @@
 import { connect } from 'react-redux'
 
 import Auth from '../views/Auth'
-import { AUTH, AUTH_ERROR } from '../logics/auth/actions'
-// TODO: utils
-import { act } from '../utils/action'
+import { authenticate } from '../logics/auth/actions.js'
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFailed: error => dispatch(act(AUTH_ERROR, error || "unknown error")),
-    onResponse: json => dispatch(act(AUTH, json)),
+    onAuth: (username, password) => dispatch(authenticate(username, password))
   }
 }
 
-const AuthContainer = connect( state => { return state }, mapDispatchToProps)(Auth)
+function mapStateToProps(state) {
+  if (state.error && state.error.auth)
+    return { error: state.error.auth }
+  else
+    return { error: "" }
+}
+
+const AuthContainer = connect(mapStateToProps, mapDispatchToProps)(Auth)
 export default AuthContainer
