@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Event from './EventCard.jsx'
 import './EventsList.css'
 
-const EventsList = ({ events, onDelete, onParticipate}) => {
+export default function EventsList({ events, onDelete, onParticipate}) {
   // console.log('View/EventList: events', events)
   if (events)
   {
@@ -22,7 +23,10 @@ const EventsList = ({ events, onDelete, onParticipate}) => {
   {
     return (<div className="events-list">No events</div>)
   }
-
 }
 
-export default EventsList
+EventsList.propTypes = {
+  events: PropTypes.array,
+  onDelete: PropTypes.func.isRequired,
+  onParticipate: PropTypes.func.isRequired
+}
