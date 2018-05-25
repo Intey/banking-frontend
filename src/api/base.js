@@ -4,13 +4,19 @@ const BASE = `http://${HOST}:${PORT}/api`
 export const EVENTS_URL = `${BASE}/events/`
 export const USERS_URL = `${BASE}/users/`
 export const AUTH_URL = `${BASE}/auth/`
+export function participantsUrl(event_id) {
+  return `${EVENTS_URL}${event_id}/participants/`
+}
 
 export async function fetchErrorMiddleware(response) {
   let res = await response
   if (res.ok)
     return res.json()
   else
-    return Promise.reject(res.json())
+  {
+    let error = await res.json()
+    throw error
+  }
 }
 
 export function get(URL) {
