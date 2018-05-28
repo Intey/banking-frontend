@@ -2,37 +2,73 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './EventCard.css'
 
-export default function Event({data, onDelete, onParticipate}) {
-  if (! data.url || data.url === "")
-  {
-    data.url = "/#"
+
+export default class Event extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { parts: props.parts || 1}
   }
 
-  let participantsList
-  if (!data.participants) {
-    participantsList = <button onClick={()=>onParticipate(data.id, 1)}> Participate </button>
-  } else {
-    participantsList = data.participants.map(p => <li>{p}</li>)
-    participantsList = <ul>{participantsList}</ul>
+  onChange = (e) => {
+    this.setState({parts: e.target.value})
   }
 
-  return (
-    <div className="event">
-      <div className="caption">
-        <a className="link" href={data.url}>
-          {data.name}
-        </a>
-        <button className="btn btn-danger" onClick={()=>onDelete(data.id)}>X</button>
-      </div>
-      <div className="price">{data.price}</div>
-      <div className="date">{data.date}</div>
-      <div className="authors">{data.author}</div>
-      <div className="participants">
-        {participantsList}
-      </div>
-      <div className="groups">{data.groups}</div>
-    </div>
-  )
+  renderParticipationAction = () => {
+    let data = this.props.data
+    let onParticipate = this.props.onParticipate
+    let participateAction = null
+    let alreadyParticipated = false
+    if (data.participants) {
+       alreadyParticipated = data.participants.filter( participant => participant === this.props.currentUser)
+    }
+    if (!alreadyParticipated) {
+      participateAction = (
+        <React.Fragment>
+          <button onClick={()=>onParticipate(data.id, this.state.parts)}> Participate </button>
+          <input type="number" name="parts" value={this.state.parts} onChange={this.onChange}/>
+        </React.Fragment>
+      )
+    }
+    return participateAction
+
+  }
+
+  render() {
+    let {data, onDelete, onParticipate} = this.props
+
+    if (! data.url || data.url === "")
+    {
+      data.url = "/#"
+    }
+
+    let participantsList
+    if (!data.participants) {
+      participantsList = <div>No participants</div>
+    } else {
+      participantsList = data.participants.map(p => <li>{p}</li>)
+      participantsList = <ul>{participantsList}</ul>
+    }
+
+
+    return (
+      <div className="event">
+        <div className="caption">
+          <a className="link" href={data.url}>
+            {data.name}
+          </a>
+          <button className="btn btn-danger" onClick={()=>onDelete(data.id)}>X</button>
+          </div>
+          <div className="price">{data.price}</div>
+          <div className="date">{data.date}</div>
+          <div className="authors">{data.author}</div>
+          <div className="participants">
+            {participantsList}
+            {this.renderParticipationAction()}
+          </div>
+          <div className="groups">{data.groups}</div>
+        </div>
+        )
+        }
 }
 
 // Requirements
