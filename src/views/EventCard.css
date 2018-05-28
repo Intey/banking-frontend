@@ -17,3 +17,22 @@
 .event .link {
   color: rgba(0, 120, 185, 0.94);
 }
+
+.participants-list {
+  margin: 0.2em 0;
+
+}
+
+.participants-list > .participant {
+  margin: 0.1em;
+  padding: 0.1em 0.3em;
+  border: 1px solid #888;
+}
+
+.participants-list > .participant:nth-child(1) {
+  margin-left: 0em;
+}
+
+.parts-input {
+  max-width: 3em;
+}

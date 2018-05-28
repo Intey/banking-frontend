@@ -19,13 +19,13 @@ export default class Event extends React.Component {
     let participateAction = null
     let alreadyParticipated = false
     if (data.participants) {
-       alreadyParticipated = data.participants.filter( participant => participant === this.props.currentUser)
+      alreadyParticipated = !!data.participants.find( p => p.id === this.props.currentUser)
     }
     if (!alreadyParticipated) {
       participateAction = (
         <React.Fragment>
+          <input type="number" name="parts" className="parts-input" value={this.state.parts} onChange={this.onChange}/>
           <button onClick={()=>onParticipate(data.id, this.state.parts)}> Participate </button>
-          <input type="number" name="parts" value={this.state.parts} onChange={this.onChange}/>
         </React.Fragment>
       )
     }
@@ -45,8 +45,8 @@ export default class Event extends React.Component {
     if (!data.participants) {
       participantsList = <div>No participants</div>
     } else {
-      participantsList = data.participants.map(p => <li>{p}</li>)
-      participantsList = <ul>{participantsList}</ul>
+      participantsList = data.participants.map(p => <a href={p.url} className="participant" key={p.id}>{p.username}</a>)
+      participantsList = <div className="participants-list">{participantsList}</div>
     }
 
 

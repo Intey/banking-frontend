@@ -11,6 +11,7 @@ function mapStateToProps(state) {
     events: filterEvents(state.events, state.filter),
     filter: 'ALL',
     sort: {},
+    currentUser: parseInt(window.sessionStorage.id)
 	}
 }
 
