@@ -10,7 +10,11 @@ export default class Event extends React.Component {
   }
 
   onChange = (e) => {
-    this.setState({parts: e.target.value})
+    const parts = parseInt(e.target.value)
+    if (Number.isInteger(parts) && parts !== 0)
+      this.setState({parts: parts})
+    else if (this.state.parts !== 1)
+      this.setState({parts: 1})
   }
 
   renderParticipationAction = () => {
@@ -18,14 +22,17 @@ export default class Event extends React.Component {
     let onParticipate = this.props.onParticipate
     let participateAction = null
     let alreadyParticipated = false
+    let all_parts = data.participants.reduce( (sum, p) => sum += p.parts, 0)
+    all_parts += this.state.parts
+    let party_pay = (data.price / all_parts) * this.state.parts
     if (data.participants) {
       alreadyParticipated = !!data.participants.find( p => p.id === this.props.currentUser)
     }
     if (!alreadyParticipated) {
       participateAction = (
         <React.Fragment>
-          <input type="number" name="parts" className="parts-input" value={this.state.parts} onChange={this.onChange}/>
-          <button onClick={()=>onParticipate(data.id, this.state.parts)}> Participate </button>
+          <input type="number" min="1" name="parts" className="parts-input" value={this.state.parts} onChange={this.onChange}/>
+          <button onClick={()=>onParticipate(data.id, this.state.parts)}> Join for {party_pay} </button>
         </React.Fragment>
       )
     }
@@ -34,7 +41,7 @@ export default class Event extends React.Component {
   }
 
   render() {
-    let {data, onDelete, onParticipate} = this.props
+    let {data, onDelete} = this.props
 
     if (! data.url || data.url === "")
     {
