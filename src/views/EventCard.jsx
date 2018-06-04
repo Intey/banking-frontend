@@ -10,7 +10,7 @@ export default class Event extends React.Component {
   }
 
   onChange = (e) => {
-    const parts = parseInt(e.target.value)
+    const parts = parseInt(e.target.value, 10)
     if (Number.isInteger(parts) && parts !== 0)
       this.setState({parts: parts})
     else if (this.state.parts !== 1)

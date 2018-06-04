@@ -11,13 +11,13 @@ function mapStateToProps(state) {
     events: filterEvents(state.events, state.filter),
     filter: 'ALL',
     sort: {},
-    currentUser: parseInt(window.sessionStorage.id)
+    currentUser: parseInt(window.sessionStorage.id, 10)
 	}
 }
 
 function createOnParticipate(dispatch) {
   return (event_id, parts) => {
-    let user_id = parseInt(window.sessionStorage.id)
+    let user_id = parseInt(window.sessionStorage.id, 10)
     if (!Number.isInteger(user_id))
     {
       console.error("sessionStorage inconsistente!")

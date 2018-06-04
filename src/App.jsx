@@ -9,6 +9,7 @@ import AuthContainer from './containers/Auth'
 import EventsList from './containers/EventsList'
 import Builder from './containers/Builder'
 import Header from './views/Header'
+import EventDetail from './views/EventDetail.jsx'
 
 function mapStateToProps(state) {
   return { isloginin: state.auth.token, fetching: state.auth_fetching }
@@ -23,6 +24,7 @@ function App({isloginin, fetching}) {
             <Switch>
               <Route exact path="/" component={EventsList}/>
               <Route path="/new" component={Builder}/>
+              <Route path="/event/:id" component={EventDetail}/>
             </Switch>
           </div>
           :
