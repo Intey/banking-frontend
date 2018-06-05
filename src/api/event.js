@@ -15,3 +15,7 @@ export function participate(event_id, user_id, parts) {
     parts: parts
   }])
 }
+
+export function getEvent(id) {
+  return get(`${EVENTS_URL}${id}`)
+}

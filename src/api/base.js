@@ -11,17 +11,22 @@ export function participantsUrl(event_id) {
 
 export async function fetchErrorMiddleware(response) {
   let res = await response
-  if (res.ok)
+  if (res.ok) {
+    console.log("OK!")
     return res.json()
+  }
   else
   {
+    console.log("catch a bug...")
     let error = await res.json()
+    console.log("bug:", error)
     throw error
   }
 }
 
 export function get(URL) {
-  return fetchErrorMiddleware(fetch(URL))
+  let data = fetch(URL)
+  return fetchErrorMiddleware( data )
 }
 
 export function post(URL, payload) {

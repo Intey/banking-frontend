@@ -24,7 +24,7 @@ function App({isloginin, fetching}) {
             <Switch>
               <Route exact path="/" component={EventsList}/>
               <Route path="/new" component={Builder}/>
-              <Route path="/event/:id" component={EventDetail}/>
+              <Route path="/events/:id" component={EventDetail}/>
             </Switch>
           </div>
           :

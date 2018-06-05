@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './EventCard.css'
 
+import { Link } from 'react-router-dom'
+
 
 export default class Event extends React.Component {
   constructor(props) {
@@ -42,17 +44,13 @@ export default class Event extends React.Component {
 
   render() {
     let {data, onDelete} = this.props
-
-    if (! data.url || data.url === "")
-    {
-      data.url = "/#"
-    }
+    data.url = `/events/${data.id}`
 
     let participantsList
     if (!data.participants) {
       participantsList = <div>No participants</div>
     } else {
-      participantsList = data.participants.map(p => <a href={p.url} className="participant" key={p.id}>{p.username}</a>)
+      participantsList = data.participants.map(p => <Link to={p.url} className="participant" key={p.id}>{p.username}</Link>)
       participantsList = <div className="participants-list">{participantsList}</div>
     }
 
@@ -60,9 +58,9 @@ export default class Event extends React.Component {
     return (
       <div className="event">
         <div className="caption">
-          <a className="link" href={data.url}>
+          <Link className="link" to={data.url}>
             {data.name}
-          </a>
+          </Link>
           <button className="btn btn-danger" onClick={()=>onDelete(data.id)}>X</button>
           </div>
           <div className="price">{data.price}</div>
