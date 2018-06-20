@@ -38,7 +38,6 @@ class Menu extends React.Component {
     return (
       <div ref={this.setWrapperRef} className={"menu " + (this.state.shown? "shown": "") }>
         <span className="menu-button" onClick={this.openClose}
-          onBlur={this.onBlur}
           tabIndex={0}
         >Menu</span>
         <ul className="menu-list">

@@ -1,4 +1,13 @@
-# Notes about redux learinig
+# Notes about Redux learinig
+
+# When to use Redux
+
+For global state, change which changes should apply to many components.
+Examples:
+- routing
+  * created event, should route to event page(by param, route to event-list)
+- cross-session data - configs, that can be used anywhare, and also should be
+  saved between sessions
 
 # Store
 
@@ -30,3 +39,4 @@ Next issue - in future i will have many error states for each view/fetch.
 I can cut this corner with hope that i has only one current view, and i don't
 need to save all errors, but only current. If in future i need separate - i
 just one more. YAGNI.
+

@@ -1,4 +1,4 @@
-import { EVENTS_URL, participantsUrl, post, get } from './base'
+import { EVENTS_URL, participantsUrl, post, get, patch } from './base'
 
 export function createEvent(payload) {
   // console.log("create new event API", payload)
@@ -17,5 +17,9 @@ export function participate(event_id, user_id, parts) {
 }
 
 export function getEvent(id) {
-  return get(`${EVENTS_URL}${id}`)
+  return get(`${EVENTS_URL}${id}/`)
+}
+
+export function saveEvent(event) {
+  return patch(`${EVENTS_URL}${event.id}/`, event)
 }
