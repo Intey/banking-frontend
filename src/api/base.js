@@ -17,8 +17,11 @@ export async function fetchErrorMiddleware(response) {
   else
   {
     console.log("catch a bug...")
-    let error = await res.text()
-    console.log("bug:", error)
+    let error
+    if (res.status === 400)
+      error = res.json()
+    else
+      error = res.text()
     throw error
   }
 }
