@@ -11,7 +11,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    errors: state.errors.builder
+    errors: state.errors.builder,
   }
 }
 

@@ -74,7 +74,7 @@ export default class Builder extends React.Component {
         <Field name="date" error={errors.date}>
           <input className="event-date" type="date" name="date" value={this.state.date} onChange={this.dateChange} placeholder="date"/>
         </Field>
-        <TypeHintInput name="author" onSelected={this.authorSelected} placeholder="author"/>
+        <TypeHintInput name="author" user={this.props.currentUser} onSelected={this.authorSelected} placeholder="author"/>
         <Field name="participants">
           <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
         </Field>

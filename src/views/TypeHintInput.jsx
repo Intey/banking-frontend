@@ -10,10 +10,13 @@ import { getUsersLike } from '../api/users.js'
 export default class Component extends React.Component {
   constructor(props) {
     super(props)
-    let user_id = this.props.user.id
+    let user_id
+    if (this.props.user && this.props.user.id)
+      user_id = this.props.user.id
     this.state = {
       dropped: false,
       variants: [],
+      value: "",
     }
     if (user_id) {
       this.state.value = this.props.user.username
