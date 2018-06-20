@@ -11,11 +11,12 @@ function mapStateToProps(state, ownProps) {
     return { event: undefined } // should fetch one
   }
   else {
-    let event = state.events.find( e => e.id === id )
+    let event = state.events.find( (e) => e.id === id )
     if (event === undefined)
       throw new Error(`impossible: can't go to event page with id ${ownProps.match.params.id}`)
 
-    return { event, author: { id: 1, username: event.author } }
+    let author = state.users.find( (u) => u.user.username === event.author)
+    return { event, author: { id: author.id, username: author.user.username } }
   }
 }
 
