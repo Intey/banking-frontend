@@ -6,6 +6,7 @@ import sort from './sort/reducers'
 import fetching from './fetchingReducer'
 import { auth } from './auth/reducers'
 import errors from './errors/reducer'
+import users from './users/reducers'
 
 function isFunction(functionToCheck) {
   var getType = {};
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   fetching,
   auth,
   errors,
+  users,
 })
 
 let debug = true

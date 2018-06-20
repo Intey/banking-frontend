@@ -19,3 +19,7 @@ export function authenticate(username, password) {
     {'username': username, 'password': password }
   )
 }
+
+export function getUsers() {
+  return get(USERS_URL)
+}

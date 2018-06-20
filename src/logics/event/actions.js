@@ -11,20 +11,6 @@ export const PARTICIPATION_REQUEST = 'PARTICIPATION_REQUEST'
 export const PARTICIPATED = 'PARTICIPATED'
 export const PARTICIPATION_FAILED = 'PARTICIPATION_FAILED'
 
-export function requestEvents() {
-  return {
-    type: REQUEST_EVENTS
-  }
-}
-
-export function receiveEvents(json) {
-  return act(RECEIVE_EVENTS, json)
-}
-
-export function fetchFails(e) {
-  return act(FETCH_FAILS, e)
-}
-
 export function createEventRequest(payload) {
   return (dispatch) => {
     dispatch(act(CREATE_REQUEST, payload))
@@ -36,10 +22,10 @@ export function createEventRequest(payload) {
 
 export function fetchEvents() {
   return (dispatch) => {
-    dispatch(requestEvents)
+    dispatch(act(REQUEST_EVENTS))
     API.getEvents()
-      .then(json => dispatch(receiveEvents(json)))
-      .catch(e => dispatch(fetchFails(e)))
+      .then(json => dispatch(act(RECEIVE_EVENTS, json)))
+      .catch(e => dispatch(act(FETCH_FAILS, e)))
 
   }
 }
