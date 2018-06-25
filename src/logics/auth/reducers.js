@@ -1,4 +1,4 @@
-import { AUTH, AUTH_START } from './actions'
+import { AUTH, AUTH_START, LOG_OUT } from './actions'
 
 /**
  * Return auth token
@@ -13,6 +13,9 @@ export function auth(state={}, action) {
     case AUTH_START:
       console.log(AUTH_START)
       return state
+    case LOG_OUT:
+      delete window.sessionStorage.token
+      return {}
     default:
       return state
   }

@@ -4,6 +4,7 @@ import { act } from '../../utils/action.js'
 export const AUTH = 'AUTH'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const AUTH_START = 'auth_start'
+export const LOG_OUT = 'LOG_OUT'
 
 export function authenticate(username, password) {
   return async function(dispatch) {
@@ -20,7 +21,8 @@ export function authenticate(username, password) {
     // server error
     catch (e) {
       let error = await e
-      return dispatch(act(AUTH_ERROR, error))
+      return dispatch(act(AUTH_ERROR, [error]))
     }
   }
 }
+

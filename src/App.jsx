@@ -8,7 +8,7 @@ import './App.css';
 import AuthContainer from './containers/Auth'
 import EventsList from './containers/EventsList'
 import Builder from './containers/Builder'
-import Header from './views/Header'
+import Header from './containers/Header'
 import EventDetail from './containers/EventDetail.jsx'
 import ErrorLog from './containers/ErrorLog.jsx'
 

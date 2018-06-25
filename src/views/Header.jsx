@@ -6,7 +6,6 @@ import {withRouter} from 'react-router-dom'
 
 
 function Header(props) {
-  console.log(props)
   return (
     <header className="app-header">
       <button onClick={props.history.goBack}>&lt;-</button>
@@ -14,6 +13,7 @@ function Header(props) {
       <div className="header-button">
         <Link to="/new">new</Link>
       </div>
+      <div className="header-button" onClick={props.onLogout}>Log out</div>
       <Menu/>
     </header>
   )
