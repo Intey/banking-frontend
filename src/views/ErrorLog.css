@@ -1,0 +1,10 @@
+
+.snacks {
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

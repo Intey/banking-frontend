@@ -66,7 +66,7 @@ export default class Builder extends React.Component {
   }
 
   render() {
-    let errors = this.props.errors || {}
+    let errors = this.props.errors || []
     return (
       <div className="builder">
         <Field name="name" value={this.state.name} onChange={this.nameChange} placeholder="event name" error={errors.name}/>

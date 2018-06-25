@@ -7,7 +7,11 @@ import ParticipantsList from './ParticipantsList.jsx'
 export default class EventDetail extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { ...props.event, author: this.props.author.id, changed: false}
+    this.state = {
+      ...props.event,
+      author: this.props.author.id,
+      changed: false,
+    }
   }
 
   onChange = (e) => {
@@ -37,7 +41,6 @@ export default class EventDetail extends React.Component {
         <TypeHintInput name="author" onSelected={this.onAuthorChange} user={this.props.author} placeholder="author"></TypeHintInput>
         <ParticipantsList participants={this.state.participants}/>
         <button onClick={this.save}>save</button>
-
       </React.Fragment>
     )
   }

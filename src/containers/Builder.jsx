@@ -10,8 +10,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+  let errors = state.errors.builder
   return {
-    errors: state.errors.builder,
+    errors: errors
   }
 }
 

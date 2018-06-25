@@ -10,14 +10,7 @@ import EventsList from './containers/EventsList'
 import Builder from './containers/Builder'
 import Header from './views/Header'
 import EventDetail from './containers/EventDetail.jsx'
-
-function mapStateToProps(state) {
-  return {
-    isloginin: state.auth.token,
-    fetching: state.auth_fetching,
-    events: state.events
-  }
-}
+import ErrorLog from './containers/ErrorLog.jsx'
 
 function Loader() {
   return (
@@ -25,16 +18,16 @@ function Loader() {
   )
 }
 
-function App({isloginin, fetching, events}) {
+function App(props) {
   let EventDetailComp = null
-  if (events.length === 0) {
+  if (props.events.length === 0) {
     EventDetailComp = Loader // progress fetcher
   } else {
     EventDetailComp = EventDetail
   }
   return (
     <Router>
-      { isloginin ?
+      { props.isloginin ?
           <div className="app">
             <Header/>
             <Switch>
@@ -42,12 +35,22 @@ function App({isloginin, fetching, events}) {
               <Route path="/new" component={Builder}/>
               <Route path="/events/:id" component={EventDetailComp}/>
             </Switch>
+            <ErrorLog errors={props.errors}/>
           </div>
           :
           <AuthContainer/>
       }
     </Router>
   )
+}
+
+function mapStateToProps(state) {
+  return {
+    isloginin: state.auth.token,
+    fetching: state.auth_fetching,
+    events: [...state.events],
+    errors: [...state.errors.snackbar]
+  }
 }
 
 export default connect(mapStateToProps)(App)

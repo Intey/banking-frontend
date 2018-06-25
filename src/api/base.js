@@ -10,18 +10,24 @@ export function participantsUrl(event_id) {
 }
 
 export async function fetchErrorMiddleware(response) {
-  let res = await response
-  if (res.ok) {
-    return res.json()
+  let res
+  // check that server awailable
+  try {
+    res = await response
   }
-  else
-  {
-    console.log("catch a bug...")
+  catch(error) {
+    throw error
+  }
+
+  if (res && res.ok) {
+    return res.json()
+  } else {
+    // await and throw error object/text, not promise
     let error
-    if (res.status === 400)
-      error = res.json()
+    if (res.status === 500)
+      error = await res.text()
     else
-      error = res.text()
+      error = await res.json()
     throw error
   }
 }

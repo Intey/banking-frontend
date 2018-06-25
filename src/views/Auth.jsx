@@ -5,25 +5,22 @@ export default class Auth extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      error: this.props.error,
       username: "",
-      password: ""
+      password: "",
     }
   }
+
   onChangeName = (e) => { this.setState({username: e.target.value}) }
   onChangePass = (e) => { this.setState({password: e.target.value}) }
 
   send = ()=> {
-    this.setState({error: ""})
+    this.setState({errors: []})
     this.props.onAuth(this.state.username, this.state.password)
   }
 
   render() {
-    let errorView = (
-      this.state.error !== "" ?
-      <p className="error">{this.state.error}</p>
-      :
-      null
+    let errorViews = this.props.errors.map( (error) =>
+      <p className="error">{error}</p>
     )
 
     return  (
@@ -33,12 +30,13 @@ export default class Auth extends React.Component {
         <input id="password" type="password" name="password"
          value={this.state.password} onChange={this.onChangePass}/>
         <button type="button" onClick={this.send}>log in</button>
-        {errorView}
+        {errorViews}
       </form>
     )
   }
 }
 
 Auth.propTypes = {
-  onAuth: PropTypes.func.isRequired
+  onAuth: PropTypes.func.isRequired,
+  errors: PropTypes.array
 }

@@ -15,8 +15,10 @@ export function createEventRequest(payload) {
   return (dispatch) => {
     dispatch(act(CREATE_REQUEST, payload))
     API.createEvent(payload)
-    .then( json => dispatch(act(CREATE_EVENT_RESPONSE, json)) )
-    .catch( e => e.then( errors => dispatch(act(CREATE_EVENT_FAILS, errors)) ))
+    .then( (json) => dispatch(act(CREATE_EVENT_RESPONSE, json)) )
+    .catch( (error) => {
+      return dispatch(act(CREATE_EVENT_FAILS, error))
+    })
 }
 }
 

@@ -10,10 +10,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  if (state.error && state.error.auth)
-    return { error: state.error.auth }
-  else
-    return { error: "" }
+  let errors = state.errors.auth || []
+  return { errors }
 }
 
 const AuthContainer = connect(mapStateToProps, mapDispatchToProps)(Auth)
