@@ -36,7 +36,7 @@ export default function errors(state={ snackbar: [] }, action) {
     case FETCH_EVENTS_FAILS:
     case FETCH_USERS_FAILS:
       let ferr = createError(action.payload.message, "Server unavailable")
-      return {...state, fetching: false , snackbar: [...snackErrors, ferr]}
+      return {...state, snackbar: [...snackErrors, ferr]}
     // WTF error
     case ERROR:
       let serr = createError(action.payload, "Server Error")
