@@ -11,6 +11,7 @@ import Builder from './containers/Builder'
 import Header from './containers/Header'
 import EventDetail from './containers/EventDetail.jsx'
 import ErrorLog from './containers/ErrorLog.jsx'
+import UserList from './containers/UserList.jsx'
 
 function Loader() {
   return (
@@ -31,9 +32,12 @@ function App(props) {
           <div className="app">
             <Header/>
             <Switch>
+              {/* exact - prevent show EventList on all pages */}
               <Route exact path="/" component={EventsList}/>
               <Route path="/new" component={Builder}/>
               <Route path="/events/:id" component={EventDetailComp}/>
+              {/* exact - prevent show UserList on "/users/:id" */}
+              <Route exact path="/users/" component={UserList}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>
