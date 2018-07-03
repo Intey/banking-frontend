@@ -12,6 +12,7 @@ import Header from './containers/Header'
 import EventDetail from './containers/EventDetail.jsx'
 import ErrorLog from './containers/ErrorLog.jsx'
 import UserList from './containers/UserList.jsx'
+import UserDetail from './containers/UserDetail.jsx'
 
 function Loader() {
   return (
@@ -38,6 +39,7 @@ function App(props) {
               <Route path="/events/:id" component={EventDetailComp}/>
               {/* exact - prevent show UserList on "/users/:id" */}
               <Route exact path="/users/" component={UserList}/>
+              <Route path="/users/:id" component={UserDetail}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>
