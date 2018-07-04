@@ -41,7 +41,7 @@ function App(props) {
             <Switch>
               {/* exact - prevent show EventList on all pages */}
               <Route exact path="/" component={EventsList}/>
-              <Route path="/new" component={Builder}/>
+              <Route path="/new-event" component={Builder}/>
               <Route path="/events/:id" component={EventDetailComp}/>
               {/* exact - prevent show UserList on "/users/:id" */}
               <Route exact path="/users/" component={UserList}/>

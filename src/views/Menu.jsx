@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
 import './Menu.css'
 
@@ -41,6 +42,9 @@ class Menu extends React.Component {
           tabIndex={0}
         >Menu</span>
         <ul className="menu-list">
+          <li className="item"><NavLink to="/events">Events</NavLink></li>
+          <li className="item"><NavLink to="/users">Users</NavLink></li>
+          <li>-----------</li>
           <li className="item" onClick={this.props.onEventDateSort}>Sort by date</li>
           <li className="item" onClick={this.props.onEventNameSort}>Sort by Name</li>
           <li className="item" onClick={this.props.onEventFilterMy}>Only my</li>
