@@ -27,6 +27,12 @@ function App(props) {
   } else {
     EventDetailComp = EventDetail
   }
+  let UserDetailComp = null
+  if (props.users.length === 0) {
+    UserDetailComp = Loader
+  } else {
+    UserDetailComp = UserDetail
+  }
   return (
     <Router>
       { props.isloginin ?
@@ -39,7 +45,7 @@ function App(props) {
               <Route path="/events/:id" component={EventDetailComp}/>
               {/* exact - prevent show UserList on "/users/:id" */}
               <Route exact path="/users/" component={UserList}/>
-              <Route path="/users/:id" component={UserDetail}/>
+              <Route path="/users/:id" component={UserDetailComp}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>
@@ -55,7 +61,8 @@ function mapStateToProps(state) {
     isloginin: state.auth.token,
     fetching: state.auth_fetching,
     events: [...state.events],
-    errors: [...state.errors.snackbar]
+    errors: [...state.errors.snackbar],
+    users: [...state.users]
   }
 }
 

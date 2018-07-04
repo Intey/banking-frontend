@@ -50,7 +50,7 @@ export default class Event extends React.Component {
     if (!data.participants) {
       participantsList = <div>No participants</div>
     } else {
-      participantsList = data.participants.map(p => <Link to={p.url} className="participant" key={p.id}>{p.username}</Link>)
+      participantsList = data.participants.map(p => <Link to={`/users/${p.id}`} className="participant" key={p.id}>{p.username}</Link>)
       participantsList = <div className="participants-list">{participantsList}</div>
     }
 

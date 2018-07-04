@@ -1,18 +1,17 @@
 import { connect } from 'react-redux'
 import UserDetail from '../views/UserDetail.jsx'
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps({ users }, ownProps) {
   const id = parseInt(ownProps.match.params.id, 10)
-  if (state.users.length === 0)
-  {
-    return { user: undefined } // should fetch one
+  let user = users.find( (e) => e.id === id )
+  user = {
+    name: user.user.username,
+    isAdmin: user.user.is_superuser,
+    balance: user.balance,
+    rate: user.rate,
+    id: user.id
   }
-  else {
-    let user = state.users.find( (e) => e.id === id )
-    if (user === undefined)
-      throw new Error(`impossible: can't go to user page with id ${ownProps.match.params.id}`)
-    return { user: user }
-  }
+  return { user: user }
 }
 
 
