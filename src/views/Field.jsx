@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 export default function Field({name, error=undefined, children=undefined, ...props}) {
   let maybeError = (
-    error !== undefined ?
+    error ?
     <span className="field-error">{error}</span>
     :
     null
