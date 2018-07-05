@@ -40,3 +40,11 @@ I can cut this corner with hope that i has only one current view, and i don't
 need to save all errors, but only current. If in future i need separate - i
 just one more. YAGNI.
 
+# Clean Architecture
+
+Data shaping: reducer & containers. All views works with only domain. Reducers
+& containers know about current backend API shapes and domain models.
+
+Motivation: shaping in reducers and containers, leads to domain models in
+store, views.
+
