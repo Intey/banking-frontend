@@ -13,6 +13,7 @@ import EventDetail from './containers/EventDetail.jsx'
 import ErrorLog from './containers/ErrorLog.jsx'
 import UserList from './containers/UserList.jsx'
 import UserDetail from './containers/UserDetail.jsx'
+import UserCreateForm from './containers/UserCreateForm.jsx'
 
 function Loader() {
   return (
@@ -41,11 +42,12 @@ function App(props) {
             <Switch>
               {/* exact - prevent show EventList on all pages */}
               <Route exact path="/" component={EventsList}/>
-              <Route path="/new-event" component={Builder}/>
               <Route path="/events/:id" component={EventDetailComp}/>
               {/* exact - prevent show UserList on "/users/:id" */}
               <Route exact path="/users/" component={UserList}/>
               <Route path="/users/:id" component={UserDetailComp}/>
+              <Route path="/new-user" component={UserCreateForm}/>
+              <Route path="/new-event" component={Builder}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>

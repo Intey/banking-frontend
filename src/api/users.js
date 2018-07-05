@@ -23,3 +23,8 @@ export function authenticate(username, password) {
 export function getUsers() {
   return get(USERS_URL)
 }
+
+export function createUser(payload) {
+  return post(USERS_URL, payload)
+  //TODO: reshape user
+}

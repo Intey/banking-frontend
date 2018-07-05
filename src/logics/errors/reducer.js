@@ -1,7 +1,7 @@
 import { CREATE_EVENT_FAILS } from '../event/actions.js'
 import { AUTH_ERROR } from '../auth/actions.js'
 import { FETCH_FAILS as FETCH_EVENTS_FAILS} from '../event/actions.js'
-import { FETCH_FAILS as FETCH_USERS_FAILS } from '../users/actions.js'
+import { FETCH_FAILS as FETCH_USERS_FAILS, USER_CREATE_FAILED } from '../users/actions.js'
 import { ERROR, NO_USER_ID } from '../system/actions.js'
 import { REMOVE_ERROR } from './action.js'
 
@@ -48,6 +48,8 @@ export default function errors(state={ snackbar: [] }, action) {
     case REMOVE_ERROR:
       const key = action.payload
 			return {...state, snackbar: [...snackErrors.filter( (e) => e.key !== key)]}
+    case USER_CREATE_FAILED:
+      return { ...state, userForm: action.payload }
     default:
       return state
   }

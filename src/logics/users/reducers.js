@@ -1,4 +1,4 @@
-import { RECEIVE_USERS } from './actions'
+import { RECEIVE_USERS, USER_CREATED } from './actions'
 
 export default function users(state=[], action) {
   switch(action.type) {
@@ -6,6 +6,8 @@ export default function users(state=[], action) {
       return action.payload
       // case CREATE_USER_RESPONSE:
       // careturn [...state, action.payload]
+    case USER_CREATED:
+      return [...state, action.payload]
     default:
       return state
   }
