@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import UserCreateForm from '../views/UserCreateForm.jsx'
 import { createUser } from '../logics/users/actions.js'
