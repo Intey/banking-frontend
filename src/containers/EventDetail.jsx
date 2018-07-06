@@ -7,17 +7,14 @@ import { saveEvent } from '../api/event.js'
 function mapStateToProps(state, ownProps) {
   const id = parseInt(ownProps.match.params.id, 10)
   if (state.events.length === 0)
-  {
     return { event: undefined } // should fetch one
-  }
-  else {
-    let event = state.events.find( (e) => e.id === id )
-    if (event === undefined)
-      throw new Error(`impossible: can't go to event page with id ${ownProps.match.params.id}`)
+  let event = state.events.find( (e) => e.id === id )
+  if (event === undefined)
+    throw new Error(`impossible: can't go to event page with id ${ownProps.match.params.id}`)
 
-    let author = state.users.find( (u) => u.user.username === event.author)
-    return { event, author: { id: author.id, username: author.user.username } }
-  }
+  let author = state.users.find( (u) => u.user.username === event.author)
+  let transactions = state.transactions.filter( (t) => t.event.id === event.id)
+  return { event, author: { id: author.id, username: author.user.username }, transactions: transactions }
 }
 
 function mapDispatchToProps(dispatch) {
