@@ -48,3 +48,20 @@ Data shaping: reducer & containers. All views works with only domain. Reducers
 Motivation: shaping in reducers and containers, leads to domain models in
 store, views.
 
+# Saving transactions
+
+## Issue
+link events,users with fetched transactions.
+
+## Solutions
+
+### Update reshape
+
+On response save transactions on common list, with uniquest filtering. Next,
+collect all new transactions events ids, and map this to correspond event/users
+
+### (used) Container filtering
+
+Fetch full data from server(users, events, transactions, etc.) and save in store.
+When show userPage - select needed user and filter transactions in store, that
+correspond to selected user
