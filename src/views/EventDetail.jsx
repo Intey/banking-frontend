@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Field from './Field.jsx'
 import TypeHintInput from './TypeHintInput.jsx'
 import ParticipantsList from './ParticipantsList.jsx'
+import TransactionList from './TransactionList.jsx'
 
 export default class EventDetail extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class EventDetail extends React.Component {
   render() {
     let event = this.state
     return (
-      <React.Fragment>
+      <div className="event-detail">
         <Field name="name">
           <input type="text" name="name" value={event.name} onChange={this.onChange} placeholder="name"/>
         </Field>
@@ -41,7 +42,8 @@ export default class EventDetail extends React.Component {
         <TypeHintInput name="author" onSelected={this.onAuthorChange} user={this.props.author} placeholder="author"></TypeHintInput>
         <ParticipantsList participants={this.state.participants}/>
         <button onClick={this.save}>save</button>
-      </React.Fragment>
+        <TransactionList transactions={this.props.transactions}/>
+      </div>
     )
   }
 }
@@ -49,5 +51,6 @@ export default class EventDetail extends React.Component {
 // TODO: prop types, dispatch
 EventDetail.propTypes = {
   handleError: PropTypes.func.isRequired,
-  saveEvent: PropTypes.func.isRequired
+  saveEvent: PropTypes.func.isRequired,
+  transactions: PropTypes.array,
 }

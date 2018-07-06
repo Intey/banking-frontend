@@ -1,0 +1,11 @@
+.transaction-list {
+  margin: 1em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #999;
+
+}
+
+.transaction-list > .list-menu {
+  border-bottom: 2px solid #999;
+}

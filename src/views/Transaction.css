@@ -1,0 +1,22 @@
+.transaction {
+  display: flex;
+  flex-direction: row;
+  padding: .2em;
+  border-bottom: 1px solid #999;
+}
+.transaction > * {
+  padding: 0.1em;
+}
+
+.transaction.pay {
+  background-color: rgba(150, 255, 150, 0.5);
+}
+
+.transaction.return {
+  background-color: rgba(255, 150, 150, 0.5);
+}
+
+.transaction.diff {
+  background-color: rgba(150, 150, 255, 0.5);
+}
+
