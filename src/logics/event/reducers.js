@@ -6,7 +6,6 @@ export default function events(state=[], action) {
       return action.payload
     case CREATE_EVENT_RESPONSE:
       return [...state, action.payload]
-
     default:
       return state
   }

@@ -1,5 +1,5 @@
 import * as API from '../../api/event'
-import { act } from '../../utils/action.js'
+import { act, createFetchAction } from '../../utils/action.js'
 
 export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
@@ -22,15 +22,10 @@ export function createEventRequest(payload) {
 }
 }
 
-export function fetchEvents() {
-  return (dispatch) => {
-    dispatch(act(REQUEST_EVENTS))
-    API.getEvents()
-      .then(json => dispatch(act(RECEIVE_EVENTS, json)))
-      .catch(e => dispatch(act(FETCH_FAILS, e)))
-
-  }
-}
+export const fetchEvents = createFetchAction(API.getEvents,
+                                             REQUEST_EVENTS,
+                                             RECEIVE_EVENTS,
+                                             FETCH_FAILS)
 
 export function participate(event_id, user_id, parts) {
   return (dispatch) => {
@@ -40,3 +35,4 @@ export function participate(event_id, user_id, parts) {
       .catch(e => dispatch(act(PARTICIPATION_FAILED, e)))
   }
 }
+
