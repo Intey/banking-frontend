@@ -5,6 +5,7 @@ export const EVENTS_URL = `${BASE}/events/`
 export const USERS_URL = `${BASE}/users/`
 export const AUTH_URL = `${BASE}/auth/`
 export const TRANSACTION_URL = `${BASE}/transactions/`
+export const GROUPS_URL = `${BASE}/groups/`
 
 export function participantsUrl(event_id) {
   return `${EVENTS_URL}${event_id}/participants/`
