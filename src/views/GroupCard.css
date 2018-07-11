@@ -1,0 +1,12 @@
+.group-card {
+  margin: 0.5em;
+  padding: 0.2em;
+  border: 1px solid #ccc;
+  width: 10em;
+  box-shadow: 2px 2px 5px gray;
+}
+
+.group-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}

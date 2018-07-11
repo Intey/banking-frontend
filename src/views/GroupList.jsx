@@ -9,7 +9,7 @@ export default function GroupList({ groups }) {
   if (!groups)
     return <span>No groups found</span>
   return (
-    <div class="groups">
+    <div class="group-list">
       { groups.map((g) => <GroupCard {...g}/>)}
     </div>
   )
