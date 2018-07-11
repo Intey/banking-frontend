@@ -44,6 +44,7 @@ class Menu extends React.Component {
         <ul className="menu-list">
           <li className="item"><NavLink to="/events">Events</NavLink></li>
           <li className="item"><NavLink to="/users">Users</NavLink></li>
+          <li className="item"><NavLink to="/groups">Groups</NavLink></li>
           <li>-----------</li>
           <li className="item" onClick={this.props.onEventDateSort}>Sort by date</li>
           <li className="item" onClick={this.props.onEventNameSort}>Sort by Name</li>
