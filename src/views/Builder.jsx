@@ -14,7 +14,6 @@ export default class Builder extends React.Component {
       date: "",
       author: -1, // id
       participants: [],
-      groups: [],
     }
   }
 
@@ -23,19 +22,14 @@ export default class Builder extends React.Component {
   dateChange   = (e) => { this.setState({date:   e.target.value}) }
   authorSelected = (id) => { this.setState({author: id}) }
 
-  onParticipantsChange = ({mode, payload}) => {
-    switch(mode) {
-      case 'add':
-        let participants = [...this.state.participants, payload]
-        this.setState({participants: participants })
-        break;
-      case 'rm':
-        let newParticipants = this.state.participants.filter( e => e !== payload )
-        this.setState({participants: newParticipants})
-        break;
-      default:
-        break;
-    }
+  onParticipantAdd = (payload) => {
+    let participants = [...this.state.participants, payload]
+    this.setState({participants: participants })
+  }
+
+  onParticipantRemove = (payload) => {
+    let newParticipants = this.state.participants.filter( e => e !== payload )
+    this.setState({participants: newParticipants})
   }
 
   catchData = (e) => {
@@ -45,24 +39,8 @@ export default class Builder extends React.Component {
       date         : this.state.date,
       author       : this.state.author,
       participants : this.state.participants,
-      groups       : this.state.groups
     }
     this.props.onNewEvent(data)
-  }
-
-  onGroupsChange = ({mode, payload}) => {
-    switch(mode) {
-      case 'add':
-        let groups = [...this.state.groups, payload]
-        this.setState({groups: groups })
-        break;
-      case 'rm':
-        let newGroups = this.state.groups.filter( e => e !== payload )
-        this.setState({groups: newGroups})
-        break;
-      default:
-        break;
-    }
   }
 
   render() {
@@ -76,10 +54,10 @@ export default class Builder extends React.Component {
         </Field>
         <TypeHintInput name="author" user={this.props.currentUser} onSelected={this.authorSelected} placeholder="author"/>
         <Field name="participants">
-          <TagInput className="event-participants" tags={this.state.participants} onTagsChange={this.onParticipantsChange} placeholder="new participant"/>
-        </Field>
-        <Field name="groups">
-          <TagInput className="event-groups" id="event-groups" tags={this.state.groups} onTagsChange={this.onGroupsChange} placeholder="new group"/>
+          <TagInput className="event-participants" tags={this.state.participants}
+            onTagAdd={this.onParticipantAdd}
+            onTagRemove={this.onParticipantRemove}
+            placeholder="new participant"/>
         </Field>
         <button onClick={this.catchData}>Create</button>
       </div>
