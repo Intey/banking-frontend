@@ -9,6 +9,7 @@ import store from './logics/store.js'
 import { fetchEvents } from './logics/event/actions.js'
 import { fetchUsers } from './logics/users/actions.js'
 import { fetchTransactions } from './logics/transactions/actions.js'
+import { fetchGroups } from './logics/groups/actions.js'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,5 +21,6 @@ ReactDOM.render(
 store.dispatch(fetchEvents())
 store.dispatch(fetchUsers())
 store.dispatch(fetchTransactions())
+store.dispatch(fetchGroups())
 
 registerServiceWorker();

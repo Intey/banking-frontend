@@ -14,6 +14,7 @@ import ErrorLog from './containers/ErrorLog.jsx'
 import UserList from './containers/UserList.jsx'
 import UserDetail from './containers/UserDetail.jsx'
 import UserCreateForm from './containers/UserCreateForm.jsx'
+import GroupList from './containers/GroupList.jsx'
 
 function Loader() {
   return (
@@ -48,6 +49,7 @@ function App(props) {
               <Route path="/users/:id" component={UserDetailComp}/>
               <Route path="/new-user" component={UserCreateForm}/>
               <Route path="/new-event" component={Builder}/>
+              <Route path="/groups" component={GroupList}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>

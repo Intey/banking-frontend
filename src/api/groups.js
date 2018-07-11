@@ -1,6 +1,6 @@
 import { GROUPS_URL, post, get, patch } from './base'
 
-export function getGroups() {
+export function fetchGroups() {
   return get(GROUPS_URL)
 }
 
