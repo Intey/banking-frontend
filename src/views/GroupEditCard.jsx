@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Field from './Field.jsx'
-import Selector from './Selector.jsx'
+// import Selector from './Selector.jsx'
 
 import './GroupEditCard.css'
 
@@ -20,7 +20,8 @@ export default class GroupEditCard extends React.Component {
       name: "",
       participants: [],
       selectedAccount: { user: {username: "", }, id: -1 },
-      parts: 0,
+      parts: 1,
+      participantText: "",
     }
     this.onChange = commonOnChange.bind(this);
     this.onChangeParts = commonOnChange.bind(this);
@@ -37,7 +38,10 @@ export default class GroupEditCard extends React.Component {
       participants: [
         ...participants,
         {key: makeid(), account: this.state.selectedAccount, parts: this.state.parts}
-      ]
+      ],
+      selectedAccount: { id: -1 },
+      participantText: "",
+      parts: 1
     })
   }
 
@@ -46,19 +50,38 @@ export default class GroupEditCard extends React.Component {
   }
 
   onSelected = (user) => {
-    this.setState({selectedAccount: user})
+    this.setState({ participantText: this.displayUsername(user),
+                    selectedAccount: user })
   }
 
   onCreateGroup = () => {
     this.props.onCreateGroup({name: this.state.name, participants: this.state.participants})
   }
 
+  renderDropdown = (variants) => {
+    if (variants.length <= 0) return <div className="dropdown"><span>no variants match</span></div>
+    const views = variants.map((v) =>
+      <li onClick={()=>this.onSelected(v)} key={v.id}>{this.displayUsername(v)}</li>)
+    return (
+      <div className="dropdown">
+        <ul>
+          {views}
+        </ul>
+      </div>
+    )
+  }
   render() {
     const participantsView = this.state.participants.map((p)=> { return (
       <div className="new-group-participant" key={p.key}>
         <span>{this.displayUsername(p.account)}</span>: <span>{p.parts}</span> <span onClick={() => this.onRemoveParticipant(p.key) }>[X]</span>
       </div>
     )})
+
+    let dropdown = null
+    if (this.state.selectedAccount.id < 0 && this.state.participantText !== "") {
+      const variants = this.props.users.filter((v) => filterUser(v, this.state.participantText))
+      dropdown = this.renderDropdown(variants)
+    }
 
     return (
     <div className="group-card new-group-editor">
@@ -70,8 +93,10 @@ export default class GroupEditCard extends React.Component {
         </div>
         <div className="participant-editor">
           <div className="editor-input username">
-            <Selector variants={this.props.users} onSelected={this.onSelected}
-              variantToString={this.displayUsername} filter={filterUser}/>
+            <div className="selector">
+              <input type="text" name="participantText" value={this.state.participantText} onChange={this.onChange}/>
+              {dropdown}
+            </div>
           </div>
           <div className="editor-input parts">
             <input name="parts" type="number" value={this.state.parts} onChange={this.onChangeParts}/>
