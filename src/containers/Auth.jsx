@@ -10,8 +10,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  let errors = state.errors.auth || []
-  return { errors }
+  let {auth=[]} = state.errors
+  return {errors: auth}
 }
 
 const AuthContainer = connect(mapStateToProps, mapDispatchToProps)(Auth)

@@ -19,8 +19,9 @@ export default class Auth extends React.Component {
   }
 
   render() {
+    console.log(this.props.errors)
     let errorViews = this.props.errors.map( (error) =>
-      <p className="error">{error}</p>
+      <p className="error">{error.message}</p>
     )
 
     return  (
