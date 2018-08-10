@@ -6,17 +6,19 @@ import GroupEditCard from './GroupEditCard.jsx'
 
 import './GroupList.css'
 
-export default function GroupList({ groups }) {
+export default function GroupList({ groups, users, onCreateGroup }) {
   if (!groups)
     return <span>No groups found</span>
   return (
     <div className="group-list">
+      <GroupEditCard users={users} onCreateGroup={onCreateGroup}/>
       { groups.map((g) => <GroupCard key={g.id} {...g}/>)}
-      <GroupEditCard/>
     </div>
   )
 }
 
 GroupList.propTypes = {
   groups: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  onCreateGroup: PropTypes.func.isRequired,
 }

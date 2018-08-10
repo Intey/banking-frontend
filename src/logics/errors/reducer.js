@@ -2,18 +2,10 @@ import { CREATE_EVENT_FAILS } from '../event/actions.js'
 import { AUTH_ERROR } from '../auth/actions.js'
 import { FETCH_FAILS as FETCH_EVENTS_FAILS} from '../event/actions.js'
 import { FETCH_FAILS as FETCH_USERS_FAILS, USER_CREATE_FAILED } from '../users/actions.js'
+import { CREATE_GROUP_FAILED } from '../groups/actions.js'
 import { ERROR, NO_USER_ID } from '../system/actions.js'
 import { REMOVE_ERROR } from './action.js'
-
-function makeid() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 8; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
-}
+import { makeid } from '../../utils/helpers.js'
 
 function createError(message, header) {
   return {
@@ -32,6 +24,8 @@ export default function errors(state={ snackbar: [] }, action) {
       return {...state, builder: action.payload}
     case AUTH_ERROR:
       return {...state, auth: action.payload}
+    case CREATE_GROUP_FAILED:
+      return {...state, groupedit: action.payload}
     // browser error
     case FETCH_EVENTS_FAILS:
     case FETCH_USERS_FAILS:

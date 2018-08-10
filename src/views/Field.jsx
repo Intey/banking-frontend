@@ -3,6 +3,13 @@ import './Field.css'
 
 import PropTypes from 'prop-types'
 
+/**
+ * Creates form-field
+ * @param {string} name - name of field label, also used for input name.
+ * @param {string} [error] - show error message for field
+ * @param {Node} [children] - child input. If no spend, will be used simple text
+ * input
+ */
 export default function Field({name, error=undefined, children=undefined, ...props}) {
   let maybeError = (
     error ?

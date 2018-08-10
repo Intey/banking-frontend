@@ -3,7 +3,7 @@ import Tag from './Tag'
 import PropTypes from 'prop-types'
 
 export default function TagInput({ tags, onTagAdd, onTagRemove, id=null,
-                                   placeholder="", className="" }) {
+                                   placeholder="" }) {
   let tagsViews = tags.map(
     (e, idx) => {
       let onTagDelete = () => onTagDelete(e)
@@ -22,7 +22,7 @@ export default function TagInput({ tags, onTagAdd, onTagRemove, id=null,
     // backspace
   }
   return (
-    <div className={className} id={id}>
+    <div id={id}>
       { tagsViews }
       <input type="text" onKeyDown={tagChange} placeholder={placeholder}/>
     </div>
@@ -36,5 +36,4 @@ TagInput.propTypes = {
   onTagRemove: PropTypes.func.isRequired,
   id: PropTypes.number,
   placeholder: PropTypes.string,
-  className: PropTypes.string,
 }

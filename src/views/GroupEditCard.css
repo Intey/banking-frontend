@@ -1,0 +1,22 @@
+.group-name {
+  width: 6em;
+  margin: 0.5em;
+}
+.editor-input {
+  display: inline-block;
+}
+.editor-input input {
+  width: 6em;
+}
+
+.editor-input.username {
+  margin-right: 0.2em;
+}
+.editor-input.parts input {
+  width: 3em;
+}
+
+.new-group-participants > * {
+  display: block;
+  padding: 0.5em;
+}
