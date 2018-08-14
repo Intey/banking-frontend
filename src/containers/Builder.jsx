@@ -12,7 +12,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   let errors = state.errors.builder
   return {
-    errors: errors
+    errors: errors,
+    currentUser: state.users.find((u) => u.id === state.auth.id),
+    users: state.users,
   }
 }
 

@@ -5,22 +5,24 @@ import Field from './Field.jsx'
 
 import './TypeHintInput.css'
 
-import { getUsersLike } from '../api/users.js'
-
-export default class Component extends React.Component {
+export default class TypeHintInput extends React.Component {
   constructor(props) {
     super(props)
-    let user_id
-    if (this.props.user && this.props.user.id)
-      user_id = this.props.user.id
+    let value = ""
+    if (this.props.user && this.props.user.id) {
+      value = this.props.user.username
+    }
+
     this.state = {
       dropped: false,
       variants: [],
-      value: "",
+      value: value,
     }
-    if (user_id) {
-      this.state.value = this.props.user.username
-    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (!newProps.user)
+      this.setState({ value: "", variants: []})
   }
 
   onChange = (e) => {
@@ -28,18 +30,18 @@ export default class Component extends React.Component {
     this.setState({value: value})
 
     if (value && value.trim() !== "") {
-      getUsersLike(value)
-        .then(variants => this.setState({variants: variants, dropped: true}))
+      const users = this.props.users.filter((u) => u.user.username.toLowerCase().startsWith(value))
+      this.setState({variants: users, dropped: users.length > 0})
     }
     else {
       this.setState({dropped: false})
     }
   }
 
-  onSelect = (idx) => {
-    let value = this.state.variants[idx].username
+  onSelect = (v) => {
+    let value = v.user.username
     this.setState({value: value, dropped: false})
-    this.props.onSelected(this.state.variants[idx].id)
+    this.props.onSelected(v)
   }
 
   render() {
@@ -48,7 +50,7 @@ export default class Component extends React.Component {
       items = <li>No variants</li>
     }
     else {
-      items = this.state.variants.map((v, idx) => <li key={idx} onClick={(e)=> this.onSelect(idx)}>{v.username}</li>)
+      items = this.state.variants.map((v, idx) => <li key={idx} onClick={(e)=> this.onSelect(v)}>{v.user.username}</li>)
     }
     let fieldProps = {...this.props}
     delete fieldProps.onSelected
@@ -68,7 +70,9 @@ export default class Component extends React.Component {
   }
 }
 
-Component.propTypes = {
+TypeHintInput.propTypes = {
   onSelected: PropTypes.func.isRequired,
-  user: PropTypes.object
+  name: PropTypes.string.isRequired,
+  user: PropTypes.object,
+  users: PropTypes.array.isRequired,
 }

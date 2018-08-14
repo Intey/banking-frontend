@@ -10,4 +10,5 @@
 
 .typehint-dropdown.open {
   display: block;
+  z-index: 2;
 }
