@@ -1,7 +1,3 @@
-.group-name {
-  width: 6em;
-  margin: 0.5em;
-}
 .editor-input {
   display: inline-block;
 }
@@ -14,11 +10,6 @@
 }
 .editor-input.parts input {
   width: 3em;
-}
-
-.new-group-participants > * {
-  display: block;
-  padding: 0.5em;
 }
 
 .selector {

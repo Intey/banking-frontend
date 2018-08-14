@@ -46,11 +46,13 @@ const rootReducer = combineReducers({
 
 let debug = true
 
-let initial = {
+const userId = parseInt(window.sessionStorage.getItem('id'), 10) || null
+const rate = parseInt(window.sessionStorage.getItem('rate'), 10) || null
+const initial = {
   auth: {
     token: window.sessionStorage.getItem('token'),
-    id: window.sessionStorage.getItem('id'),
-    rate: window.sessionStorage.getItem('rate'),
+    id: userId,
+    rate: rate,
   },
 }
 
@@ -61,6 +63,6 @@ if (debug) {
 }
 export default createStore(rootReducer,
   initial,
-  enchancer( applyMiddleware(ping, thunk) )
+  enchancer( applyMiddleware(thunk) )
 )
 

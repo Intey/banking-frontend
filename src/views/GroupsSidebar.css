@@ -1,0 +1,39 @@
+.groups-sidebar {
+  position: fixed;
+  height: 100%;
+  width: 15em;
+  right: 0;
+  transition: right 0.3s ease;
+  display: flex;
+  align-items: stretch;
+  background-color: #ccc;
+}
+
+.sidebar-body {
+  padding: .5em;
+}
+
+.sidebar-edge {
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bbb;
+}
+
+.groups-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.groups-list .group-item {
+  margin-bottom: 1em;
+}
+
+.groups-sidebar.open {
+  right: 0em;
+}
+
+.groups-sidebar.closed {
+  right: -13em;
+}

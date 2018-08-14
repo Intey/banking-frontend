@@ -7,6 +7,7 @@ export const GROUPS_FETCH_FAILED = 'GROUPS_FETCH_FAILED'
 export const CREATE_GROUP_REQUEST = 'CREATE_GROUP_REQUEST'
 export const CREATE_GROUP_RESPONSE = 'CREATE_GROUP_RESPONSE'
 export const CREATE_GROUP_FAILED = 'CREATE_GROUP_FAILED'
+export const GROUP_SELECTED = 'GROUP_SELECTED'
 
 
 export const fetchGroups = createFetchAction(API.fetchGroups,
@@ -23,4 +24,8 @@ export function createGroup(payload) {
       return dispatch(act(CREATE_GROUP_FAILED, error))
     })
 }
+}
+
+export function selectGroup(group) {
+  return act(GROUP_SELECTED, group)
 }
