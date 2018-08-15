@@ -8,6 +8,7 @@ export const CREATE_GROUP_REQUEST = 'CREATE_GROUP_REQUEST'
 export const CREATE_GROUP_RESPONSE = 'CREATE_GROUP_RESPONSE'
 export const CREATE_GROUP_FAILED = 'CREATE_GROUP_FAILED'
 export const GROUP_SELECTED = 'GROUP_SELECTED'
+export const GROUP_DESELECTED = 'GROUP_DESELECTED'
 
 
 export const fetchGroups = createFetchAction(API.fetchGroups,
@@ -28,4 +29,8 @@ export function createGroup(payload) {
 
 export function selectGroup(group) {
   return act(GROUP_SELECTED, group)
+}
+
+export function deselectGroup(group) {
+  return act(GROUP_DESELECTED, group)
 }

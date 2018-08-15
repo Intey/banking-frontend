@@ -3,16 +3,13 @@ import { connect } from 'react-redux'
 import { selectGroup } from '../logics/groups/actions.js'
 import View from '../views/GroupsSidebar.jsx'
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onSelectGroup: selectGroup
-  }
+const mapDispatchToProps = {
+  onSelectGroup: selectGroup
 }
 
 function mapStateToProps(state) {
   return {
-    groups: state.groups,
-    currentGroup: state.selectedGroup
+    groups: state.groups.filter((g) => !state.selectedGroups.includes(g)),
   }
 }
 

@@ -61,6 +61,7 @@ export default class Builder extends React.Component {
   render() {
     let errors = this.props.errors || []
     const participantsView = this.state.participants.map(this.renderParticipant)
+    const groupsParticipantsView = this.props.selectedGroups.map((g) => g.participants.map(this.renderParticipant))
     return (
       <div className="builder-page">
         <div className="builder">
@@ -71,6 +72,9 @@ export default class Builder extends React.Component {
           </Field>
           <TypeHintInput name="author" user={this.props.currentUser} users={this.props.users}
             onSelected={this.authorSelected} placeholder="author"/>
+          <ul className="groups">
+            {this.props.selectedGroups.map((g) => <li onClick={() => this.props.onDeselectGroup(g)} key={g.id}>{g.name}</li>)}
+          </ul>
           <ParticipantsEditor className="participants"
             users={this.props.users}
             participants={this.state.participants}
@@ -78,6 +82,7 @@ export default class Builder extends React.Component {
           <div>
             <span>Participants:</span>
             {participantsView}
+            {groupsParticipantsView}
           </div>
           <button onClick={this.catchData}>Create</button>
         </div>
@@ -92,4 +97,6 @@ Builder.propTypes = {
   errors: PropTypes.array,
   currentUser: PropTypes.object,
   users: PropTypes.array.isRequired,
+  selectedGroups: PropTypes.array.isRequired,
+  onDeselectGroup: PropTypes.func.isRequired,
 }
