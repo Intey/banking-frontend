@@ -3,7 +3,23 @@ import View from '../views/GroupList.jsx'
 import { createGroup } from '../logics/groups/actions.js'
 
 function mapStateToProps(state) {
-	return { groups: state.groups, users: state.users }
+  let { groups } = state;
+  groups = groups.map((g) => {
+    let {participants, ...rest} = g
+    return {
+      ...rest,
+      participants: participants.map((p) => {
+        let user = state.users.find((u) => u.id === p.account)
+        if (!user)
+          user = {id: p.account, user: { username: 'notfound'} }
+        return {
+          ...p,
+          account: { id: user.id, username: user.user.username },
+        }
+      })
+    }
+  })
+	return { groups: groups, users: state.users }
 }
 
 function mapDispatchToProps(dispatch) {

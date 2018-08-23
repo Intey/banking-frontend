@@ -12,7 +12,7 @@ export default function GroupCard({name, participants}) {
       <div className="group-name">{name}</div>
       {
         participants.map((p) =>
-          <div className="group-participant" key={p.account.id}>
+          <div className="group-participant" key={p.id}>
             <Link to={`/users/${p.account.id}`}>{p.account.username}</Link>: <span className="parts">{p.parts}</span>
           </div>
         )
