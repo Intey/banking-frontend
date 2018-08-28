@@ -8,8 +8,31 @@ import GroupsSidebar from '../containers/GroupsSidebar.jsx'
 import ParticipantsEditor from './ParticipantsEditor.jsx'
 
 import { displayUsername } from '../utils/domain.js'
+import userShape from '../logics/users/shape.js'
+import groupShape from '../logics/groups/shape.js'
 
 import './Builder.css'
+
+function mergeParticipants(participants, groups) {
+  let result = participants.map((p) => {return {...p}}) // clone
+  for (let group of groups)
+  {
+    for(let participant of group.participants)
+    {
+      let found = result.find((p) => p.id === participant.id)
+      if (found)
+      {
+        found.parts += participant.parts
+      }
+      else
+      {
+        result.push({id: participant.id, parts: participant.parts})
+      }
+    }
+  }
+  return result
+}
+
 
 export default class Builder extends React.Component {
   constructor(props) {
@@ -28,7 +51,7 @@ export default class Builder extends React.Component {
   dateChange   = (e) => { this.setState({date:   e.target.value}) }
   authorSelected = (author) => { this.setState({author: author.id}) }
 
-  catchData = (e) => {
+  onCreate = (e) => {
     let data = {
       name         : this.state.name,
       price        : this.state.price,
@@ -40,28 +63,49 @@ export default class Builder extends React.Component {
   }
 
   addParticipant = (p) => {
-    const participants = [...this.state.participants, p]
+    if (this.state.participants.length === 0)
+    {
+      this.setState({participants: [p]})
+      return
+    }
+    let participants = this.state.participants.reduce((acc, pp) => {
+      if (pp.id === p.id)
+      {
+        acc.push({...pp, parts: pp.parts + p.parts})
+        return acc
+      }
+      else {
+        acc.push({...p})
+        return acc
+      }
+    }, [])
     this.setState({participants: participants})
   }
 
   onRemoveParticipant = (id) => {
-    const participants = this.state.participants.filter((p) => p.account.id !== id)
+    const participants = this.state.participants.filter((p) => p.id !== id)
     this.setState({participants: participants})
   }
 
   renderParticipant = (p) => {
-    const {account, parts} = p
-    return (
-      <div className={`${this.props.className} new-group-participant`} key={account.id}>
-        <span>{displayUsername(account)}</span>: <span>{parts}</span> <span onClick={() => this.onRemoveParticipant(account.id) }>[X]</span>
-      </div>
-    )
+    const {id, parts} = p
+    const user = this.props.users.find((u) => u.id == id)
+    if (user)
+    {
+      return (
+        <div className={`${this.props.className} new-group-participant`} key={id}>
+          <span>{displayUsername(user)}</span>: <span>{parts}</span> <span onClick={() => this.onRemoveParticipant(id) }>[X]</span>
+        </div>
+      )
+    }
+    return null
   }
 
   render() {
     let errors = this.props.errors || []
-    const participantsView = this.state.participants.map(this.renderParticipant)
-    const groupsParticipantsView = this.props.selectedGroups.map((g) => g.participants.map(this.renderParticipant))
+    const participantsView = mergeParticipants(this.state.participants,
+                                               this.props.selectedGroups)
+      .map(this.renderParticipant)
     return (
       <div className="builder-page">
         <div className="builder">
@@ -77,14 +121,12 @@ export default class Builder extends React.Component {
           </ul>
           <ParticipantsEditor className="participants"
             users={this.props.users}
-            participants={this.state.participants}
             onAddParticipant={this.addParticipant}/>
           <div>
             <span>Participants:</span>
             {participantsView}
-            {groupsParticipantsView}
           </div>
-          <button onClick={this.catchData}>Create</button>
+          <button onClick={this.onCreate}>Create</button>
         </div>
         <GroupsSidebar/>
       </div>
@@ -95,8 +137,8 @@ export default class Builder extends React.Component {
 Builder.propTypes = {
   onNewEvent: PropTypes.func.isRequired,
   errors: PropTypes.array,
-  currentUser: PropTypes.object,
-  users: PropTypes.array.isRequired,
-  selectedGroups: PropTypes.array.isRequired,
+  currentUser: userShape,
+  users: PropTypes.arrayOf(userShape).isRequired,
+  selectedGroups: PropTypes.arrayOf(groupShape).isRequired,
   onDeselectGroup: PropTypes.func.isRequired,
 }

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { commonOnChange } from '../utils/helpers.js'
 import './ParticipantsEditor.css'
 import TypeHintInput from './TypeHintInput.jsx'
+import userShape from '../logics/users/shape.js'
 
 export default class ParticipantsEditor extends React.Component {
   constructor(props) {
@@ -16,15 +17,15 @@ export default class ParticipantsEditor extends React.Component {
   }
 
 
-  onSelected = (user) => {
-    this.setState({ selectedAccount: user })
+  onSelected = ({id}) => {
+    this.setState({ selectedAccount: id })
   }
 
 
   onAddParticipant = () => {
-    const acc = this.state.selectedAccount
+    const userId = this.state.selectedAccount
     this.props.onAddParticipant(
-        {account: acc, parts: this.state.parts}
+        {id: userId, parts: parseInt(this.state.parts)}
     )
     this.setState({
       selectedAccount: null,
@@ -58,7 +59,6 @@ export default class ParticipantsEditor extends React.Component {
   );}
 }
 ParticipantsEditor.propTypes = {
-  participants: PropTypes.array,
   onAddParticipant: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
 }

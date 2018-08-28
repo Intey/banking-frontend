@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import userShape from '../logics/users/shape.js'
 import './GroupCard.css'
 
 import { Link } from 'react-router-dom'
@@ -13,7 +14,7 @@ export default function GroupCard({name, participants}) {
       {
         participants.map((p) =>
           <div className="group-participant" key={p.id}>
-            <Link to={`/users/${p.account.id}`}>{p.account.username}</Link>: <span className="parts">{p.parts}</span>
+            <Link to={`/users/${p.id}`}>{p.username}</Link>: <span className="parts">{p.parts}</span>
           </div>
         )
       }
@@ -23,5 +24,5 @@ export default function GroupCard({name, participants}) {
 
 GroupCard.propTypes = {
   name: PropTypes.string.isRequired,
-  participants: PropTypes.array
+  participants: PropTypes.arrayOf(userShape).isRequired,
 }

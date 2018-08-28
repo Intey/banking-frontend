@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import './GroupsSidebar.css'
 
+import groupShape from '../logics/groups/shape.js'
+
 export default class GroupsSidebar extends React.Component {
   constructor(props) {
     super(props)
@@ -42,6 +44,6 @@ export default class GroupsSidebar extends React.Component {
 
 
 GroupsSidebar.propTypes = {
-  groups: PropTypes.array.isRequired,
+  groups: PropTypes.arrayOf(groupShape).isRequired,
   onSelectGroup: PropTypes.func.isRequired,
 }

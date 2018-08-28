@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Field from './Field.jsx'
 
+import userShape from '../logics/users/shape.js'
 import './TypeHintInput.css'
 
 export default class TypeHintInput extends React.Component {
@@ -10,7 +11,7 @@ export default class TypeHintInput extends React.Component {
     super(props)
     let value = ""
     if (this.props.user && this.props.user.id) {
-      value = this.props.user.username
+      value = this.props.username
     }
 
     this.state = {
@@ -30,7 +31,7 @@ export default class TypeHintInput extends React.Component {
     this.setState({value: value})
 
     if (value && value.trim() !== "") {
-      const users = this.props.users.filter((u) => u.user.username.toLowerCase().startsWith(value))
+      const users = this.props.users.filter((u) => u.username.toLowerCase().startsWith(value))
       this.setState({variants: users, dropped: users.length > 0})
     }
     else {
@@ -39,7 +40,7 @@ export default class TypeHintInput extends React.Component {
   }
 
   onSelect = (v) => {
-    let value = v.user.username
+    let value = v.username
     this.setState({value: value, dropped: false})
     this.props.onSelected(v)
   }
@@ -50,7 +51,7 @@ export default class TypeHintInput extends React.Component {
       items = <li>No variants</li>
     }
     else {
-      items = this.state.variants.map((v, idx) => <li key={idx} onClick={(e)=> this.onSelect(v)}>{v.user.username}</li>)
+      items = this.state.variants.map((v, idx) => <li key={idx} onClick={(e)=> this.onSelect(v)}>{v.username}</li>)
     }
     let fieldProps = {...this.props}
     delete fieldProps.onSelected
@@ -73,6 +74,6 @@ export default class TypeHintInput extends React.Component {
 TypeHintInput.propTypes = {
   onSelected: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  user: PropTypes.object,
-  users: PropTypes.array.isRequired,
+  user: userShape,
+  users: PropTypes.arrayOf(userShape).isRequired,
 }

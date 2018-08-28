@@ -4,6 +4,6 @@ export function filterUser(user, text) {
 }
 
 export function displayUsername(user) {
-  return user.user.username
+  return user.username
 }
 

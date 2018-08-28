@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Builder from '../views/Builder'
 import { createEventRequest } from '../logics/event/actions'
 import { deselectGroup } from '../logics/groups/actions.js'
+import { denormalizeGroup } from '../logics/groups/shape.js'
 
 const mapDispatchToProps = {
   onNewEvent: createEventRequest,
@@ -12,21 +13,15 @@ const mapDispatchToProps = {
 function mapStateToProps(state) {
   let errors = state.errors.builder
   // normalize groups accounts to users shape
-  const selectedGroups = state.selectedGroups.map((g) => {
-    const {participants, ...ret} = g
-    ret.participants = participants.map((p) => {
-      return {
-        account: state.users.find((u) => u.id === p.id),
-        parts: p.parts
-      }
-    })
-    return ret
-  })
-
+  const selectedGroups = state.selectedGroups.map((g) => denormalizeGroup(g, state.users))
+  let currentUser
+  const user = state.users.find((u) => u.id === state.auth.id)
+  if (user)
+    currentUser = { id: user.id, username: user.user.username }
   return {
     errors: errors,
-    currentUser: state.users.find((u) => u.id === state.auth.id),
-    users: state.users,
+    currentUser: currentUser,
+    users: state.users.map((u) => { return { id: u.id, username: u.user.username } }),
     selectedGroups: selectedGroups,
   }
 }
