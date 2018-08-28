@@ -89,7 +89,7 @@ export default class Builder extends React.Component {
 
   renderParticipant = (p) => {
     const {id, parts} = p
-    const user = this.props.users.find((u) => u.id == id)
+    const user = this.props.users.find((u) => u.id === id)
     if (user)
     {
       return (

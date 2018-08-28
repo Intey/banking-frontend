@@ -25,7 +25,7 @@ export default class ParticipantsEditor extends React.Component {
   onAddParticipant = () => {
     const userId = this.state.selectedAccount
     this.props.onAddParticipant(
-        {id: userId, parts: parseInt(this.state.parts)}
+        {id: userId, parts: parseInt(this.state.parts, 10)}
     )
     this.setState({
       selectedAccount: null,
@@ -60,6 +60,6 @@ export default class ParticipantsEditor extends React.Component {
 }
 ParticipantsEditor.propTypes = {
   onAddParticipant: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired,
+  users: PropTypes.arrayOf(userShape).isRequired,
 }
 

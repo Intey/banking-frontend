@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import './Snackbar.css'
 
 export default class Snackbar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount = () => {
     let timeout = this.props.timeout
     if (!timeout)

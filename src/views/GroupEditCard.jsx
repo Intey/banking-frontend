@@ -5,7 +5,7 @@ import Field from './Field.jsx'
 
 import './GroupEditCard.css'
 
-import { commonOnChange, makeid } from '../utils/helpers.js'
+import { commonOnChange } from '../utils/helpers.js'
 import { displayUsername } from '../utils/domain.js'
 
 import ParticipantsEditor from './ParticipantsEditor.jsx'
