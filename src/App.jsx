@@ -9,12 +9,13 @@ import AuthContainer from './containers/Auth'
 import EventsList from './containers/EventsList'
 import Builder from './containers/Builder'
 import Header from './containers/Header'
-import EventDetail from './containers/EventDetail.jsx'
-import ErrorLog from './containers/ErrorLog.jsx'
-import UserList from './containers/UserList.jsx'
-import UserDetail from './containers/UserDetail.jsx'
-import UserCreateForm from './containers/UserCreateForm.jsx'
-import GroupList from './containers/GroupList.jsx'
+import EventDetail from './containers/EventDetail'
+import ErrorLog from './containers/ErrorLog'
+import UserList from './containers/UserList'
+import UserDetail from './containers/UserDetail'
+import UserCreateForm from './containers/UserCreateForm'
+import GroupList from './containers/GroupList'
+import ProfilePage from './containers/Profile'
 
 function Loader() {
   return (
@@ -50,6 +51,7 @@ function App(props) {
               <Route path="/new-user" component={UserCreateForm}/>
               <Route path="/new-event" component={Builder}/>
               <Route path="/groups" component={GroupList}/>
+              <Route path="/profile" component={ProfilePage}/>
             </Switch>
             <ErrorLog errors={props.errors}/>
           </div>

@@ -42,6 +42,7 @@ class Menu extends React.Component {
           tabIndex={0}
         >Menu</span>
         <ul className="menu-list">
+          <li className="item"><NavLink to="/profile">Profile</NavLink></li>
           <li className="item"><NavLink to="/events">Events</NavLink></li>
           <li className="item"><NavLink to="/users">Users</NavLink></li>
           <li className="item"><NavLink to="/groups">Groups</NavLink></li>
