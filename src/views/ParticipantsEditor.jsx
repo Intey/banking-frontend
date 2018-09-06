@@ -41,7 +41,7 @@ export default class ParticipantsEditor extends React.Component {
           <div className="editor-input username">
             <div className="selector">
               <TypeHintInput name="new participant" users={this.props.users} onSelected={this.onSelected}
-                user={this.state.selectedAccount}/>
+                user={this.props.users.find((u) => u.id === this.state.selectedAccount)}/>
             </div>
           </div>
           <div className="editor-input parts">

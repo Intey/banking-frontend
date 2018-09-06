@@ -106,6 +106,8 @@ export default class Builder extends React.Component {
     const participantsView = mergeParticipants(this.state.participants,
                                                this.props.selectedGroups)
       .map(this.renderParticipant)
+
+    const author = this.props.users.find((u) => u.id === this.state.author)
     return (
       <div className="builder-page">
         <div className="builder">
@@ -114,7 +116,7 @@ export default class Builder extends React.Component {
           <Field name="date" error={errors.date}>
             <input className="event-date" type="date" name="date" value={this.state.date} onChange={this.dateChange} placeholder="date"/>
           </Field>
-          <TypeHintInput name="author" user={this.props.currentUser} users={this.props.users}
+          <TypeHintInput name="author" user={author} users={this.props.users}
             onSelected={this.authorSelected} placeholder="author"/>
           <ul className="groups">
             {this.props.selectedGroups.map((g) => <li onClick={() => this.props.onDeselectGroup(g)} key={g.id}>{g.name}</li>)}
