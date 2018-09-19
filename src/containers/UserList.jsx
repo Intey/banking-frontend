@@ -1,18 +1,12 @@
 import { connect } from 'react-redux'
 
-import UserList from '../views/UserList.jsx'
+import UserList from '../views/UserList'
+
+import { denormalizeUser } from '../logics/users/shape'
 
 function mapStateToProps(state) {
   return {
-    users: state.users.map( u => {
-      return {
-        username: u.user.username,
-        isAdmin: u.user.is_superuser,
-        balance: u.balance,
-        rate: u.rate,
-        id: u.id
-      }
-    })
+    users: state.users.map(denormalizeUser)
   }
 }
 

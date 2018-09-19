@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import GroupCard from './GroupCard.jsx'
 import GroupEditCard from './GroupEditCard.jsx'
+import userShape from '../logics/users/shape.js'
 
 import './GroupList.css'
 
@@ -19,6 +20,6 @@ export default function GroupList({ groups, users, onCreateGroup }) {
 
 GroupList.propTypes = {
   groups: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
+  users: PropTypes.arrayOf(userShape).isRequired,
   onCreateGroup: PropTypes.func.isRequired,
 }

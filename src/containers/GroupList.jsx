@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import View from '../views/GroupList.jsx'
-import { createGroup } from '../logics/groups/actions.js'
-import { denormalize } from '../logics/groups/shape.js'
+import { createGroup } from '../logics/groups/actions'
+import { denormalize } from '../logics/groups/shape'
+import { denormalizeUser } from '../logics/users/shape'
 
 function mapStateToProps(state) {
   return {
     groups: denormalize(state),
-    users: state.users
+    users: state.users.map(denormalizeUser)
   }
 }
 
