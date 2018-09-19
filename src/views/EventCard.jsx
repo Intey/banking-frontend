@@ -82,7 +82,7 @@ let dataShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
-  author: PropTypes.string.isRequired,
+  author: PropTypes.number.isRequired,
   participants: PropTypes.array,
   groups: PropTypes.array,
 })

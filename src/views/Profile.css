@@ -1,0 +1,24 @@
+.profile-page {
+  display: grid;
+  grid-template-areas:
+  "pr pr . gr"
+  "pr pr . gr"
+  "tr tr . ev"
+  "tr tr . ev";
+}
+
+.profile__group-list {
+  grid-area: gr;
+}
+
+.profile__transaction-list {
+  grid-area: tr;
+}
+
+.profile__event-list {
+  grid-area: ev;
+}
+
+.profile__profile-info {
+  grid-area: pr;
+}

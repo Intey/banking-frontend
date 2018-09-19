@@ -12,7 +12,7 @@ function mapStateToProps(state, ownProps) {
   if (event === undefined)
     throw new Error(`impossible: can't go to event page with id ${ownProps.match.params.id}`)
 
-  let author = state.users.find( (u) => u.user.username === event.author)
+  let author = state.users.find( (u) => u.user.id === event.author.id)
   let transactions = state.transactions.filter( (t) => t.event.id === event.id)
   return { event, author: { id: author.id, username: author.user.username }, transactions: transactions }
 }
