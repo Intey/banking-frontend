@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onCreateGroup: (group) => {
       let participants = group.participants.map((p) => {
-        return {account: p.account.id, parts: p.parts}
+        return {account: p.id, parts: p.parts}
       })
 
       dispatch(createGroup({participants: participants, name: group.name}))

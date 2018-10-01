@@ -10,10 +10,11 @@ import './GroupList.css'
 export default function GroupList({ groups, users, onCreateGroup }) {
   if (!groups)
     return <span>No groups found</span>
+  // делаем reverse, чтобы новые показывались раньше
   return (
     <div className="group-list">
       <GroupEditCard users={users} onCreateGroup={onCreateGroup}/>
-      { groups.map((g) => <GroupCard key={g.id} {...g}/>)}
+      { groups.reverse().map((g) => <GroupCard key={g.id} {...g}/>)}
     </div>
   )
 }

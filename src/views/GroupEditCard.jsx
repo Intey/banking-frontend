@@ -22,7 +22,7 @@ export default class GroupEditCard extends React.Component {
   }
 
   onRemoveParticipant = (id) => {
-    const participants = this.state.participants.filter((p) => p.account.id !== id)
+    const participants = this.state.participants.filter((p) => p.id !== id)
     this.setState({participants: participants})
   }
 
@@ -40,12 +40,13 @@ export default class GroupEditCard extends React.Component {
   }
 
   renderParticipant = (p) => {
-    const {account, parts} = p
+    const {id, parts} = p
+    const user = this.props.users.find((u) => u.id == id)
     return (
-      <div className={`${this.props.className} new-group-participant`} key={account.id}>
+      <div className={`${this.props.className} new-group-participant`} key={id}>
         <span>
-          {displayUsername(account)}: {parts}&nbsp;
-          <span onClick={() => this.onRemoveParticipant(account.id) }>[X]</span>
+          {displayUsername(user)}: {parts}&nbsp;
+          <span onClick={() => this.onRemoveParticipant(id) }>[X]</span>
       </span>
       </div>
     )
