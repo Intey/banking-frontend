@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
+import './Auth.css'
+
 export default class Auth extends React.Component {
   constructor(props) {
     super(props)
@@ -24,14 +26,16 @@ export default class Auth extends React.Component {
     )
 
     return  (
-      <form className="auth-form">
-        <input id="username" type="text" name="username"
-          value={this.state.username} onChange={this.onChangeName}/>
-        <input id="password" type="password" name="password"
-         value={this.state.password} onChange={this.onChangePass}/>
-        <button type="button" onClick={this.send}>log in</button>
-        {errorViews}
-      </form>
+      <div class="auth-page">
+        <form className="auth-form">
+          <input id="username" type="text" name="username"
+            value={this.state.username} onChange={this.onChangeName}/>
+          <input id="password" type="password" name="password"
+           value={this.state.password} onChange={this.onChangePass}/>
+          <button type="button" onClick={this.send}>log in</button>
+          {errorViews}
+        </form>
+      </div>
     )
   }
 }

@@ -1,0 +1,20 @@
+.auth-page {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 40em;
+}
+.auth-form > * {
+  margin: .4em;
+  height: 2em;
+}
+.auth-form #username {
+}
+
+.auth-form #password {
+}
