@@ -10,12 +10,11 @@ export default function EventsList({ events, onDelete, onParticipate, currentUse
   {
     return (
       <div className="events-list">
-        {events.map( (e, id) => {
-          if (!e.private)
-            return <Event key={id} data={e} onDelete={onDelete} onParticipate={onParticipate} currentUser={currentUser}/>
-          else
-            return null
-        })}
+        {events.map((e, id) =>
+          <Event key={id} data={e} onDelete={onDelete}
+                 onParticipate={onParticipate}
+                 currentUser={currentUser}/>
+        )}
       </div>
     )
   }

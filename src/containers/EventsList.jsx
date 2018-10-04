@@ -7,11 +7,18 @@ import { noUserId } from '../logics/system/actions.js'
 // import sort from '../logics/sorter'
 
 function mapStateToProps(state) {
+  const currentUser = parseInt(window.sessionStorage.id, 10)
+  const visibleEvents = state.events.filter((e) => {
+    console.log(e.name, e.private, e.participants, currentUser)
+    // FIXME: birthday event match username
+    const userParticipated = e.participants.find((p) => p.id === currentUser) !== undefined
+    return (!e.private || (e.private && userParticipated))
+  })
 	return {
-    events: filterEvents(state.events, state.filter),
+    currentUser,
+    events: filterEvents(visibleEvents, state.filter),
     filter: 'ALL',
     sort: {},
-    currentUser: parseInt(window.sessionStorage.id, 10)
 	}
 }
 
