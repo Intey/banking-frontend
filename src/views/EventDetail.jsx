@@ -39,7 +39,8 @@ export default class EventDetail extends React.Component {
         <Field name="price">
           <input name="price" type="number" value={event.price} onChange={this.onChange} placeholder="price"/>
         </Field>
-        <TypeHintInput name="author" onSelected={this.onAuthorChange} user={this.props.author} placeholder="author"></TypeHintInput>
+        <TypeHintInput name="author" onSelected={this.onAuthorChange} user={this.props.author}
+                       placeholder="author" users={this.props.users}/>
         <ParticipantsList participants={this.state.participants}/>
         <button onClick={this.save}>save</button>
         <TransactionList transactions={this.props.transactions}/>
