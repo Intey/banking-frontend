@@ -16,8 +16,12 @@ function mapStateToProps(state, ownProps) {
   let author = state.users.find( (u) => u.id === event.author)
   if (author) author = denormalizeUser(author)
   let transactions = state.transactions.filter( (t) => t.event.id === event.id)
-  return { event, author: { id: author.id, username: author.user.username }, transactions: transactions, users: state.users.map(denormalizeUser)
- }
+  return {
+    event,
+    author: { id: author.id, username: author.username },
+    transactions: transactions,
+    users: state.users.map(denormalizeUser)
+  }
 }
 
 function mapDispatchToProps(dispatch) {
