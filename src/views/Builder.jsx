@@ -68,18 +68,19 @@ export default class Builder extends React.Component {
       this.setState({participants: [p]})
       return
     }
-    let participants = this.state.participants.reduce((acc, pp) => {
-      if (pp.id === p.id)
-      {
-        acc.push({...pp, parts: pp.parts + p.parts})
-        return acc
-      }
-      else {
-        acc.push({...p})
-        return acc
-      }
-    }, [])
-    this.setState({participants: participants})
+    // deepcopy
+    let participants = this.state.participants.map((p) => ({...p}))
+    // no copy. get direct link, and change
+    let found_participant = participants.find((pp) => pp.id === p.id)
+
+    if (found_participant !== undefined) {
+      found_participant.parts += p.parts
+    }
+    else {
+      participants.push(p)
+    }
+
+    this.setState({participants})
   }
 
   onRemoveParticipant = (id) => {
